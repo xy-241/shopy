@@ -1,31 +1,3 @@
-/*Extra Font family*/
-/*@font-face{
-        font-family: "slant";
-        src:url("../fonts/SLANT.TTF");
-}
-@font-face {
-        font-family: "text";
-        src:url("../fonts/CooperHewitt-Light.otf");
-}
-
-/*Extra Font Family*/
-
-/*Common Settings*/
-/*{
-  margin:0px;
-  padding:0px;
-}
-body{
-  transition: all 0.5s ease-in-out;
-}
-ul{
-  list-style-type: none;
-  padding:0;
-}
-a{
-  text-decoration: none;
-  color: white;
-}
 /*Common Settings*/
 
 /*Nav part*/
@@ -136,91 +108,6 @@ a{
 
 
 
-/*homeContent*/
-/*.homeContent, .messageContent{
-  padding-top: 60px;
-}
-
-.aboutMe h2{
-  padding-top: 25px;
-  text-align: center;
-  font-family: monospace;
-  font-weight:900;
-  font-size: 2.5em;
-
-}
-.myPic{
-  border:1px solid black;
-  border-radius: 20%;
-  display: block;
-  margin:auto;
-  margin-top: 10px;
-  margin-bottom: 30px;
-
-  height:auto;
-  width: 80%;
-}
-.quote{
-  font-family:slant;
-  margin-bottom: 30px;
-  text-align: center;
-  font-size: 1.2em;
-}
-.myInfo{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  text-align: center;
-  width:100%;
-}
-.block{
-  padding-bottom: 90px;
-  margin-bottom: 10px;
-  padding-left: 50px;
-  padding-right: 50px;
-  background-color: rgba(230, 231, 232, 0.24);
-
-}
-.block h3{
-  margin-top: 90px;
-  margin-bottom: 15px;
-}
-.block p{
-  line-height: 1.6;
-  margin-bottom: 5px;
-}
-.block p,.block li{
-  font-family: text;
-}
-.block h3{
-  font-family: monospace;
-  font-weight: 300;
-  font-size: 30px;
-}
-
-.block3{
-  padding-bottom: 50px;
-}
-.twoPlatform{
-  padding-top: 40px;
-  display: flex;
-  justify-content: center;
-}
-.twoPlatform a{
-  padding-right: 18px;
-  padding-left: 18px;
-  display: block;
-}
-.insta:hover{
-
-  transform:  rotate(5deg) translate(0px, -15px) scale(1.1,1.1);
-  transition: all 0.3s ease-in-out;
-}
-.github:hover{
-  transform: rotate(5deg) translate(0px, -15px) scale(1.1, 1.1);
-  transition: all 0.3s ease-in-out;
-}*/
 
 .homeFooter{
   color:white;
@@ -336,38 +223,7 @@ a{
     background-color: white !important;
   }
 
-/*HomeContent*/
-/*  .homeContent{
-    display: block !important;
-  }
-  .aboutMe h2{
-    padding-bottom: 10px;
-  }
-  .myPic{
-    height: 345px !important;
-    width:345px !important;
-    margin-bottom: 20px;
-  }
-  .quote{
-    font-size: 1.5em;
-  }
-  .myInfo{
-    flex-direction: row;
 
-  }
-  .block1{
-    margin-right: 5px;
-  }
-  .block2{
-    margin-left: 5px;
-    margin-right: 5px;
-  }
-  .block3{
-    margin-left: 5px;
-  }
-  .block p,.block li{
-    font-size: 1.2em;
-  }*/
   .homeFooter{
     padding-top: 95px !important;
   }
@@ -393,11 +249,3 @@ a{
 
   }
 }
-
-/*@media only screen and (min-width: 500px){
-  .myPic{
-    height:390px;
-    width: 390px;
-  }
-}
-/*Responsive&*/
