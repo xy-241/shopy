@@ -1,0 +1,2 @@
+1) Password Length requirment is not set yet
+2) Only Accept email name login

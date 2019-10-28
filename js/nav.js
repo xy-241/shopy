@@ -13,6 +13,7 @@ var toggleNav = function(){
 
   var getSection = document.querySelector("article");
   var getMainNav = document.querySelector(".navMain"); //navMain
+  var getFooter = document.querySelector('footer');
 
   var getBody = document.querySelector("body"); //body
 
@@ -30,6 +31,7 @@ var toggleNav = function(){
 
     getSection.style.display ="none"; //Content
     toggleNavStatus = true;
+    getFooter.style.display = "none";
   }
   else if (toggleNavStatus == true){
     getSideNavUl.style.visibility = "hidden";
@@ -45,5 +47,6 @@ var toggleNav = function(){
     getSection.style.display ="block"; //Content
     getBody.style.backgroundColor = "white"; //testing
     toggleNavStatus = false;
+    getFooter.style.display = "block";
   }
 }

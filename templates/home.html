@@ -1,0 +1,125 @@
+{% extends "layout.html" %}
+
+{% block cssJs %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+  <script src="{{ url_for('static', filename='js/home.js') }}"></script>
+{% endblock cssJs %}
+
+{% block content %}
+<article class="workContent">
+  <div class="banner">
+    <img src="{{ url_for('static', filename='img/hacking2.jpg') }}" alt="">
+    <div class="background"></div>
+    <h2>Hacker's Shop</h2>
+  </div>
+
+
+
+
+  <!--Tabs-->
+  <section class="sellingItems">
+    <div class="tabs">
+      <button type="button" class="tabButton" value="sellingOutfits">Hacker's Outfits</button>
+      <button type="button" class="tabButton" value="sellingTools">Hacker's Tools</button>
+    </div>
+  </section>
+  <!--Tabs-->
+
+  <!-- itemsAvailable -->
+<section class="itemsAvailable">
+    <div class="sellingOutfits subPage">
+      <h3>Hacker's Outfits</h3>
+      <div class="shopItems">
+
+        <div class="shopItem item1">
+          <span class="itemName">Hacker's Hat</span>
+          <img src="{{ url_for('static', filename='img/shop/hackingHat.jpg') }}" alt="Hacking Hat's pic">
+          <div class="shopItemDetails">
+            <span class="itemPrice">S$9.99</span>
+            <button type="button" class="addToCart">Add To Cart</button>
+          </div>
+        </div>
+
+        <div class="shopItem item2">
+          <span class="itemName">Hacker's Hoodie</span>
+          <img src="{{ url_for('static', filename='img/shop/hackingHoodie.jpg') }}" alt="Hacking Hoodie's pic">
+          <div class="shopItemDetails">
+            <span class="itemPrice">S$29.99</span>
+            <button type="button" class="addToCart">Add To Cart</button>
+          </div>
+        </div>
+
+      </div> <!-- End of shopItems page -->
+    </div> <!-- End of sellingOutfits page -->
+
+    <div class="sellingTools subPage">
+      <h3>Hacker's Tools</h3>
+      <div class="shopItems">
+
+        <div class="shopItem item1">
+          <span class="itemName">Pi Zero W</span>
+          <img src="{{ url_for('static', filename='img/shop/hackingToolPi.jpg') }}" alt="Pi Zero's pic">
+          <div class="shopItemDetails">
+            <span class="itemPrice">S$19.99</span>
+            <button type="button" class="addToCart">Add To Cart</button>
+          </div>
+        </div>
+
+        <div class="shopItem item2">
+          <span class="itemName">Arduino</span>
+          <img src="{{ url_for('static', filename='img/shop/hackingToolAd.jpg') }}" alt="Arduino's pic">
+          <div class="shopItemDetails">
+            <span class="itemPrice">S$9.99</span>
+            <button type="button" class="addToCart">Add To Cart</button>
+          </div>
+        </div>
+
+      </div> <!-- End of shopItems page -->
+    </div> <!-- Endo of sellingTools page -->
+</section>
+<!-- itemsAvailable -->
+<button type="button" class="goToShoppingCart">Go To Cart</button>
+
+
+<button type="button" class="goBack">Go Back</button>
+<!-- shoppingCart -->
+<section class="shoppingCart">
+  <h3>Cart</h3>
+  <div class="cartItems">
+
+  </div>
+
+  <div class="cartTotal">
+    <p>Total Amount</p>
+    <p class="amountToPay">$0</p>
+  </div>
+  <div class="cartEmpty">
+    <p>Your Cart Is Empty, Buy Some And Be A Hacker!</p>
+  </div>
+</section>
+<!-- shoppingCart -->
+
+
+<button type="button" class="checkout">Checkout</button>
+
+
+
+
+</article>
+
+<!-- Modal -->
+<section class="addToCartModal">
+  <div class="modalContent">
+    <div class="modalHeader">
+      <p class="closeBtn">&times;</p>
+    </div>
+    <div class="modalBody">
+      <p class="modalBodyHeader">Item Added!</p>
+      <p class="modalBodyMessage">Please Go To Your Cart To Checkout</p>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+
+{% endblock content %}
