@@ -31,7 +31,7 @@
     </nav>
     <div class="logo">
       <!--<img src="img/logo.png" alt="logo" class="logo">-->
-      <a href="index.html"></a>
+      <a href="{{ url_for('home') }}"></a>
     </div>
 
     <div class="logoPosition">
@@ -53,29 +53,36 @@
       </ul>
     </nav>
 
-
-
-    {% block content %}
+    <article class="workContent">
+      {% block header %}
+      {% endblock %}
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         {% for category, message in messages %}
-          <div class="alert alert-{{ category }}">
+          <section class="alert alert-{{ category }}">
             {{ message }}
-          </div>
+          </section>
         {% endfor %}
-
       {% endif %}
     {% endwith %}
+
+
+
+    {% block content %}
     {% endblock %}
+  </article>
+
+
+
 
 
 
     <footer class="homeFooter">
       <div class="footerSelection">
-        <p class="backToTop"><a href="#">Back To Top</a></p>
+        <p class="backToTop"><a href="#" >Back To Top</a></p>
         <p class="homeFooter0"><a href="">PlaceHoder 1</a></p>
 
-        <p class=homeFooter2><a href="">PlaceHoder 2</a></p>
+        <p class="homeFooter2"><a href="">PlaceHoder 2</a></p>
 
         <p class="homeFooter3"><a href="">PlaceHoder 3</a></p>
         <p class="homeFooter4"><a href="">PlaceHoder 4</a></p>

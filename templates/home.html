@@ -5,13 +5,17 @@
   <script src="{{ url_for('static', filename='js/home.js') }}"></script>
 {% endblock cssJs %}
 
+{% block header%}
+<div class="banner">
+  <img src="{{ url_for('static', filename='img/hacking2.jpg') }}" alt="">
+  <div class="background"></div>
+  <h2>Hacker's Shop</h2>
+</div>
+{% endblock header%}
+
 {% block content %}
-<article class="workContent">
-  <div class="banner">
-    <img src="{{ url_for('static', filename='img/hacking2.jpg') }}" alt="">
-    <div class="background"></div>
-    <h2>Hacker's Shop</h2>
-  </div>
+
+
 
 
 
@@ -105,7 +109,6 @@
 
 
 
-</article>
 
 <!-- Modal -->
 <section class="addToCartModal">
