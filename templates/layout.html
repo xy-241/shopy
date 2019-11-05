@@ -56,15 +56,7 @@
     <article class="workContent">
       {% block header %}
       {% endblock %}
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, message in messages %}
-          <section class="alert alert-{{ category }}">
-            {{ message }}
-          </section>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
+    
 
 
 

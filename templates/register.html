@@ -7,6 +7,15 @@
 {% block content %}
 
   <div class="content-section">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <section class="zindex-dropdown alert alert-{{ category }}">
+            {{ message }}
+          </section>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
     <form action="" method="POST">
       {{ form.hidden_tag() }}
 
@@ -78,8 +87,8 @@
     </form>
   </div>
 
-  <div class="m-4">
-    <small class="text-muted">
+  <div class="m-3">
+    <small class="text-muted m-5">
       Already Have An Account? <a class="ml-2 text-primary" href="{{url_for('login')}}">Sign In</a>
     </small>
   </div>
