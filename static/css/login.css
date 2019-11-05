@@ -1,3 +1,6 @@
 .workContent{
   padding-top: 90px;
 }
+.preventFloat{
+  position: None;
+}

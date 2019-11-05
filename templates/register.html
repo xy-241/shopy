@@ -7,15 +7,7 @@
 {% block content %}
 
   <div class="content-section">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, message in messages %}
-          <section class="zindex-dropdown alert alert-{{ category }}">
-            {{ message }}
-          </section>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
+  
     <form action="" method="POST">
       {{ form.hidden_tag() }}
 

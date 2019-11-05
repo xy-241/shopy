@@ -12,7 +12,7 @@
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         {% for category, message in messages %}
-          <section class="alert alert-{{ category }}">
+          <section class="p-3 mt-3 preventFloat alert alert-{{ category }}">
             {{ message }}
           </section>
         {% endfor %}
