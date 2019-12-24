@@ -92,6 +92,8 @@
 
   transition: all 0.5s ease-in-out; /*#####*/
 }
+
+
 .sideNav a:hover{
   color: grey;
 }
@@ -133,8 +135,6 @@
 .onPage{
   color:grey;
 
-
-  cursor:default;
   pointer-events: none;
 }
 
@@ -197,7 +197,7 @@
     margin:0;
     padding: 0;
 
-    padding-top: 15px;
+    padding-top: 8px;
     padding-right: 30px;
 
 

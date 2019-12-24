@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}">
+
+    {% if title %}
+      <title>YXY - {{ title }}</title>
+    {% else %}
+      <title>Error</title>
+
+    {% endif %}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logoT.png')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/init.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css')}}">
+    <script src="{{ url_for('static', filename='js/nav.js') }}"></script>
+
+    {% block cssJs %}{% endblock %}
+
+  </head>
+  <body>
+    <nav class="navMain">
+      <div onclick="toggleNav()"  class="resize">
+      <div class="menu" onclick="menuFunction(this)">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+      </div>
+    </div>
+
+    </nav>
+    <div class="logo">
+      <!--<img src="img/logo.png" alt="logo" class="logo">-->
+      <a href="{{ url_for('home') }}"></a>
+    </div>
+
+    <div class="logoPosition">
+      <div class="shopLogo">
+      </div>
+    </div>
+
+    <div class="logoPosition">
+      <div class="shopCartLogo">
+      </div>
+    </div>
+
+
+
+
+    <nav class="sideNav">
+      <ul>
+        <!-- The different page links -->
+        {% if title == 'Home' %}
+          <li>
+            <a href="{{url_for('home')}}" id="first" class='onNavPage'>Home</a>
+          </li>
+        {% else %}
+          <li>
+            <a href="{{url_for('home')}}" id="first" >Home</a>
+          </li>
+        {% endif %}
+
+        {% if current_user.is_authenticated %}
+          {% if title == 'Account '%}
+            <li>
+              <a href="{{ url_for('account') }}" class='onNavPage'>Account</a>
+            </li>
+          {% else %}
+            <li>
+              <a href="{{ url_for('account') }}">Account</a>
+            </li>
+          {% endif %}
+          <li>
+            <a href="{{ url_for('logout')}}">Logout</a>
+          </li>
+        {% else %}
+          {% if title == 'Register' %}
+            <li>
+              <a href="{{url_for('register')}}" class='onNavPage'>Register</a>
+            </li>
+          {% else %}
+            <li>
+              <a href="{{url_for('register')}}">Register</a>
+            </li>
+          {% endif %}
+
+          {% if title== 'Login' %}
+            <li>
+              <a href="{{url_for('login')}}" class='onNavPage'>Login</a>
+            </li>
+          {% else %}
+            <li>
+              <a href="{{url_for('login')}}">Login</a>
+            </li>
+          {% endif %}
+        {% endif %}
+
+        {% if title == 'about'%}
+          <li>
+            <a href="#" class='onNavPage'>About Us</a>
+          </li>
+        {% else %}
+          <li>
+            <a href="#">About Us</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+
+    <article class="workContent">
+      {% block header %}
+      {% endblock %}
+
+
+
+
+    {% block content %}
+    {% endblock %}
+  </article>
+
+
+
+
+
+
+    <footer class="homeFooter">
+      <div class="footerSelection">
+        <p class="backToTop"><a href="#" >Back To Top</a></p>
+
+        {% if title == 'Home'%}
+          <p class="homeFooter0"><a href="{{url_for('home')}}" class='onPage'>Home</a></p>
+        {% else %}
+          <p class="homeFooter0"><a href="{{url_for('home')}}">Home</a></p>
+        {% endif %}
+
+        {% if title == 'Register' %}
+          <p class="homeFooter2"><a href="{{url_for('register')}}" class='onPage'>Register</a></p>
+        {% else %}
+          <p class="homeFooter2"><a href="{{url_for('register')}}" >Register</a></p>
+        {% endif %}
+
+        {% if title == 'Login' %}
+          <p class="homeFooter3"><a href="{{url_for('login')}}" class='onPage'>Login</a></p>
+        {% else %}
+          <p class="homeFooter3"><a href="{{url_for('login')}}">Login</a></p>
+        {% endif %}
+
+
+        {% if title == 'about'%}
+          <p class="homeFooter4"><a href="", class='onPage'>About Us</a></p>
+        {% else %}
+          <p class="homeFooter4"><a href="">About Us</a></p>
+        {% endif %}
+        <p class="homeFooter1"><a href="">PlaceHoder 5</a></p>
+      </div>
+
+      <div class="copyright">Copyright  &copy; 2019 YXY. All rights reserved.</div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

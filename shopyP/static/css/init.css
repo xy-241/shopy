@@ -22,6 +22,7 @@
 *{
   margin:0px;
   padding:0px;
+  font-family: shopFont2;
 }
 body{
   transition: all 0.5s ease-in-out;
