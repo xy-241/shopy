@@ -5,11 +5,14 @@ from flask import redirect
 from flask import request # Obtain the route in the url, check what type the request is, the page of post the user requests
 
 from shopyP import app, db, bcrypt
-from shopyP.forms import RegistrationForm, LoginForm
-from shopyP.models import User, CartItem
+from shopyP.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from shopyP.models import User, Admin, CartItem
 
 from flask_login import login_user, current_user, logout_user, login_required # Login Users in, to indicate users already login in, log user out, making sure users cant access certain pages before they login
 
+import secrets # Give the picture a random index
+import os # To get the extension of the picture
+from PIL import Image # TO compress the pic
 
 @app.route("/")
 @app.route("/home")
@@ -43,7 +46,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            next_page = request.args.get('next')
+            next_page = request.args.get('next') # For Going back to account page after login
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
             flash('Login Unsuccessful. Please check username and password', 'danger')
@@ -53,7 +56,52 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('home'))
-@app.route("/account")
+
+# Save picture locally
+def save_picture(form_picture):
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_picture.filename) # Underscore is used to throw away a no useful variable
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn) # Get the absolute path in order to save
+
+    # Compress the picture before saving it
+    output_size =(125, 125)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+
+    i.save(picture_path) # Save the user picture locally
+    return picture_fn # SO user can use the filename outside the function, one function for one purpose
+
+@app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
-    return render_template('account.html', title='Account')
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data)
+            current_user.image_file = picture_file
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('Your account has been updated!', 'success')
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    image_file = url_for('static', filename='profile_pics/'+current_user.image_file)
+    return render_template('account.html', title='Account', image_file=image_file, form=form)
+
+@app.route("/admin", methods=['GET', 'POST'])
+def admin_login():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        admin = Admin.query.filter_by(email=form.email.data).first()
+        if admin and bcrypt.check_password_hash(admin.password, form.password.data):
+            login_user(admin, remember=form.remember.data)
+            next_page = request.args.get('next') # For Going back to account page after login
+            return redirect(next_page) if next_page else redirect(url_for('home'))
+        else:
+            flash('Login Unsuccessful. Please check username and password', 'danger')
+    return render_template('admin/login.html', form=form, title='Login')

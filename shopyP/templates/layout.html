@@ -65,7 +65,7 @@
         {% endif %}
 
         {% if current_user.is_authenticated %}
-          {% if title == 'Account '%}
+          {% if title == 'Account'%}
             <li>
               <a href="{{ url_for('account') }}" class='onNavPage'>Account</a>
             </li>
@@ -120,7 +120,7 @@
 
     {% block content %}
     {% endblock %}
-  </article>
+    </article>
 
 
 

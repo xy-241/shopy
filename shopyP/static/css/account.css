@@ -1,0 +1,15 @@
+.workContent{
+  padding-top: 90px;
+  margin: auto;
+  width: 80%;
+}
+
+.accountHeader{
+  display: flex;
+  justify-content: flex-start;
+  overflow: auto
+}
+
+.accountInfo{
+  margin-left: 10%;
+}
