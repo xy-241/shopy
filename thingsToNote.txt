@@ -1,2 +1,14 @@
 1) Password Length requirment is not set yet
 2) Only Accept email name login
+User class/ register form
+username min 2 character, max 20 characters
+email max 120 characters
+image file name max 20characters
+password max 20 characters
+Picture: allow jpg and png only
+CartItem class
+title max characters 100
+
+MUST CHANGE FONT FAMILY FOR SOME FIELD
+
+if user is 10000000000 or more, then the admin login is not working

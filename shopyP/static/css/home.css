@@ -22,6 +22,8 @@
   filter: invert(1);
   transform: scale(0.7, 0.7);
   transition: all 0.4s ease-in-out;
+
+
 }
 .shopCartLogo:hover{
   filter: invert(0.5);

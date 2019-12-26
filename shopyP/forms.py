@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationE
 from flask_wtf.file import FileField, FileAllowed # The type of th field, and what type of file is allowed
 from flask_login import current_user # Indicate current user
 
-from shopyP.models import User
+from shopyP.models import User, Admin
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',  #Username is shown in html, the label method

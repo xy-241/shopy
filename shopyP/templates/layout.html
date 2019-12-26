@@ -74,9 +74,49 @@
               <a href="{{ url_for('account') }}">Account</a>
             </li>
           {% endif %}
+
+          {% if current_user.id >= 10000000000 %}
+            {% if title == 'inventory'%}
+              <li>
+                <a href="#" class='onNavPage'>Inventory</a>
+              </li>
+            {% else %}
+              <li>
+                <a href="#">Inventory</a>
+              </li>
+            {% endif %}
+
+
+            {% if title == 'dashboard'%}
+              <li>
+                <a href="#" class='onNavPage'>Dashboard</a>
+              </li>
+            {% else %}
+              <li>
+                <a href="#">Dashboard</a>
+              </li>
+            {% endif %}
+          {% else %}
+            {% if title == 'about'%}
+              <li>
+                <a href="#" class='onNavPage'>About Us</a>
+              </li>
+            {% else %}
+              <li>
+                <a href="#">About Us</a>
+              </li>
+            {% endif %}
+          {% endif %}
           <li>
             <a href="{{ url_for('logout')}}">Logout</a>
           </li>
+          <li>
+            <div class="shopCartLogo">
+            </div>
+          </li>
+          <li></li>
+
+
         {% else %}
           {% if title == 'Register' %}
             <li>
@@ -97,17 +137,21 @@
               <a href="{{url_for('login')}}">Login</a>
             </li>
           {% endif %}
+
+          {% if title == 'about'%}
+            <li>
+              <a href="#" class='onNavPage'>About Us</a>
+            </li>
+          {% else %}
+            <li>
+              <a href="#">About Us</a>
+            </li>
+          {% endif %}
+
+
         {% endif %}
 
-        {% if title == 'about'%}
-          <li>
-            <a href="#" class='onNavPage'>About Us</a>
-          </li>
-        {% else %}
-          <li>
-            <a href="#">About Us</a>
-          </li>
-        {% endif %}
+
       </ul>
     </nav>
 

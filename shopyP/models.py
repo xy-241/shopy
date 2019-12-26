@@ -2,9 +2,14 @@ from datetime import datetime
 from shopyP import db, login_manager # database instance, login-auth instance
 from flask_login import UserMixin # used for login-auth, To satisfy the login_manager requirements
 
+
 @login_manager.user_loader # Decorator used to find the user id, so we can perform a match and carry on
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    user_id = int(user_id)
+    if user_id >= 10000000000:
+        return Admin.query.get(user_id)
+    else:
+        return User.query.get(user_id)
 
 # Class format for user
 class User(db.Model, UserMixin):

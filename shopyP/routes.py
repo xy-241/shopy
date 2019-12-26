@@ -91,6 +91,17 @@ def account():
     image_file = url_for('static', filename='profile_pics/'+current_user.image_file)
     return render_template('account.html', title='Account', image_file=image_file, form=form)
 
+@app.route("/deleteUser", methods=['POST'])
+@login_required
+def delete_user():
+    if current_user.id >= 10000000000:
+        user = Admin.query.filter_by(id=current_user.id).first()
+    else:
+        user = User.query.filter_by(id=current_user.id).first()
+    db.session.delete(user)
+    db.session.commit()
+    flash("You account has been deleted!", 'success')
+    return redirect(url_for('register'))
 @app.route("/admin", methods=['GET', 'POST'])
 def admin_login():
     if current_user.is_authenticated:

@@ -7,7 +7,16 @@
 {% block content %}
 
   <div class="content-section">
-  
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <section class="p-3 mt-3 preventFloat alert alert-{{ category }}">
+            {{ message }}
+          </section>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
     <form action="" method="POST">
       {{ form.hidden_tag() }}
 
