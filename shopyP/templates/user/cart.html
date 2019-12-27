@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block cssJs %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+  <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+{% endblock cssJs %}
+
+{% block header%}
+<div class="banner">
+  <img src="{{ url_for('static', filename='img/hacking2.jpg') }}" alt="">
+  <div class="background"></div>
+  <h2>Hacker's Shop</h2>
+</div>
+{% endblock header%}
+
+{% block content %}
+<!-- shoppingCart -->
+<section class="shoppingCart">
+  <h3>Cart</h3>
+  <div class="cartItems">
+
+  </div>
+
+  <div class="cartTotal">
+    <p>Total Amount</p>
+    <p class="amountToPay">$0</p>
+  </div>
+  <div class="cartEmpty">
+    <p>Your Cart Is Empty, Buy Some And Be A Hacker!</p>
+  </div>
+</section>
+<!-- shoppingCart -->
+
+
+  <button type="button" class="checkout">Checkout</button>
+{% endblock content %}

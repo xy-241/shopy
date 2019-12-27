@@ -22,6 +22,7 @@ var toggleNav = function(){
 
     getSideNav.style.display ="block"; //Nav
 
+
     getMainNav.style.backgroundColor = "black";
     getMainNav.style.borderBottom = "1.49px grey solid";
 
@@ -37,6 +38,7 @@ var toggleNav = function(){
     getSideNavUl.style.visibility = "hidden";
 
     getSideNav.style.display ="none"; //Nav
+
 
     getMainNav.style.backgroundColor = "#262729";
     //getMainNav.style.height = "50px"; //testing

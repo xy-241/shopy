@@ -38,15 +38,17 @@
       <a href="{{ url_for('home') }}"></a>
     </div>
 
-    <div class="logoPosition">
-      <div class="shopLogo">
+    {% if title == "Cart" %}
+      <div class="logoPosition">
+        <a  href="{{ url_for('home') }}" class="shopLogo">
+        </a>
       </div>
-    </div>
-
+    {% else %}
     <div class="logoPosition">
-      <div class="shopCartLogo">
-      </div>
+      <a  href="{{ url_for('cart') }}" class="shopCartLogo">
+      </a>
     </div>
+    {% endif %}
 
 
 
@@ -110,11 +112,22 @@
           <li>
             <a href="{{ url_for('logout')}}">Logout</a>
           </li>
-          <li>
-            <div class="shopCartLogo">
-            </div>
-          </li>
-          <li></li>
+
+          <div class="sideCart">
+            <li>
+              {% if title == 'Cart' %}
+                <a  href="{{ url_for('home') }}" class="shopLogo">
+                </a>
+              {% else %}
+              <a  href="{{ url_for('cart') }}" class="shopCartLogo">
+              </a>
+              {% endif %}
+            </li>
+          </div>
+          <div class="sideCart">
+            <li></li>
+          </div>
+
 
 
         {% else %}

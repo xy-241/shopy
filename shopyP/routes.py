@@ -116,3 +116,9 @@ def admin_login():
         else:
             flash('Login Unsuccessful. Please check username and password', 'danger')
     return render_template('admin/login.html', form=form, title='Login')
+
+
+@app.route("/cart")
+@login_required
+def cart():
+    return render_template('user/cart.html', title="Cart")

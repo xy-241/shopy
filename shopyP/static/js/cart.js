@@ -74,44 +74,12 @@ for(var i=0; i<storedCartItems.length; i++){
   updateTheCart()   //Update the cart!!!
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //Tab Actions
-  var tabs = document.getElementsByClassName("tabButton");
-  for(var i = 0; i< tabs.length; i++){
-    tabs[i].addEventListener("click", displayItems);
-  }
-  //Tab Actions
 
-  //Modal
-  window.addToCartModal = document.getElementsByClassName("addToCartModal")[0];
-  document.getElementsByClassName("closeBtn")[0].addEventListener("click", removeModal);
-  window.addEventListener("click", clickOutsideModal);
-  //Modal
   //Add to cart
   var addToCart = document.getElementsByClassName("addToCart");
   for(var i = 0; i<addToCart.length; i++){
     addToCart[i].addEventListener("click", addToCartFunc);
   }
-
-
-
-
-  //Go to cart button
-  var goToShoppingCart = document.getElementsByClassName("goToShoppingCart")[0];
-  goToShoppingCart.addEventListener("click", showShoppingCart);
-
-
-
-  //Go to cart button
-
-  //Go Back Button
-  // var goBack = document.getElementsByClassName("goBack")[0];
-  // goBack.addEventListener("click", showShoppingItems);
-  //
-  // goBack = document.getElementsByClassName("shopLogo")[0];
-  // goBack.addEventListener("click", showShoppingItems);
-  //Go Back Button
-
-
 
 
   //NumSelected
@@ -240,17 +208,6 @@ function updateTheCart(){
   //Check if carts has anything
 
 }
-function removeModal(event){
-  var button = event.target;
-
-  button.parentElement.parentElement.parentElement.style.display = "none";
-}
-function clickOutsideModal(event){
-  var area = event.target;
-  if(area == window.addToCartModal){
-    window.addToCartModal.style.display = "none";
-  }
-}
 function addToCartFunc(event){
   //MOdal
 
@@ -336,39 +293,6 @@ function addToCartFunc(event){
   return;
 }
 
-
-
-
-//Go To Cart
-function showShoppingCart(event){
-  //HIde the shopping items
-  document.getElementsByClassName("sellingItems")[0].style.display = "none";
-  document.getElementsByClassName("itemsAvailable")[0].style.display = "none";
-  document.getElementsByClassName("goToShoppingCart")[0].style.display = "none";
-  //HIde the shopping items
-
-  //Display shopping cart
-  document.getElementsByClassName("shoppingCart")[0].style.display = "block";
-  // document.getElementsByClassName("goBack")[0].style.display = "block";
-  document.getElementsByClassName("checkout")[0].style.display = "block";
-  document.getElementsByClassName("shopLogo")[0].style.display = "block";
-  //Display shopping cart
-}
-//Go Back
-function showShoppingItems(event){
-  //Display the shopping items
-  document.getElementsByClassName("sellingItems")[0].style.display = "block";
-  document.getElementsByClassName("itemsAvailable")[0].style.display = "block";
-  document.getElementsByClassName("goToShoppingCart")[0].style.display = "block";
-  //Display the shopping items
-
-  //Hide shopping cart
-  document.getElementsByClassName("shoppingCart")[0].style.display = "none";
-  // document.getElementsByClassName("goBack")[0].style.display = "none";
-  document.getElementsByClassName("checkout")[0].style.display = "none";
-  document.getElementsByClassName("shopLogo")[0].style.display = "none";
-  //Hide shopping cart
-}
 
 function displayItems(event){
   //Get the item Page Name

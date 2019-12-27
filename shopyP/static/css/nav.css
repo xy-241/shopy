@@ -1,6 +1,12 @@
 /*Common Settings*/
 
 /*Nav part*/
+.sideCart{
+  display: none;
+}
+.sideNav{
+  display: block;
+}
 .navMain{
   background-color: #262729;
   height:50px;
@@ -159,6 +165,9 @@
 /*Responsive*/
 @media only screen and (min-width: 1000px){
 /*Nav*/
+  .sideCart{
+    display: block;
+  }
   /*Click menu*/
   .logo{
     /*left:49%;*/
