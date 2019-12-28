@@ -1,54 +1,3 @@
-/*Nav shopLogo*/
-.logoPosition{
-  position: fixed;
-  display: flex;
-  justify-content: flex-end;
-  width:100%;
-
-
-}
-
-.shopCartLogo{
-  display: block;
-
-  position: fixed;
-  top:0.6%;
-
-  cursor: pointer;
-  background: url("../img/shop/shoppingCart.svg") no-repeat;
-
-  height:38px;
-  width:46px;
-  filter: invert(1);
-  transform: scale(0.7, 0.7);
-  transition: all 0.4s ease-in-out;
-
-
-}
-.shopCartLogo:hover{
-  filter: invert(0.5);
-}
-
-
-.shopLogo{
-  position: fixed;
-  top:0.6%;
-
-  cursor: pointer;
-  background: url("../img/shop/shopLogo.svg") no-repeat;
-
-  height:38px;
-  width:46px;
-  filter: invert(1);
-  transform: scale(0.7, 0.7);
-  transition: all 0.4s ease-in-out;
-}
-.shopLogo:hover{
-  filter: invert(0.5);
-}
-/*Nav shopLogo*/
-
-
 /*Modal*/
 .addToCartModal{
   display: none;
@@ -520,10 +469,6 @@ button{
 }
 
 @media only screen and (min-width: 1000px){
-
-  .logoPosition{
-    display: none;
-  }
   .workContent{
     display: block !important;
     padding-top: 0px;

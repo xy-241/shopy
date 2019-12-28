@@ -38,16 +38,18 @@
       <a href="{{ url_for('home') }}"></a>
     </div>
 
-    {% if title == "Cart" %}
+    {% if current_user.is_authenticated %}
+      {% if title == "Cart" %}
+        <div class="logoPosition">
+          <a  href="{{ url_for('home') }}" class="shopLogo">
+          </a>
+        </div>
+      {% else %}
       <div class="logoPosition">
-        <a  href="{{ url_for('home') }}" class="shopLogo">
+        <a  href="{{ url_for('cart') }}" class="shopCartLogo">
         </a>
       </div>
-    {% else %}
-    <div class="logoPosition">
-      <a  href="{{ url_for('cart') }}" class="shopCartLogo">
-      </a>
-    </div>
+      {% endif %}
     {% endif %}
 
 

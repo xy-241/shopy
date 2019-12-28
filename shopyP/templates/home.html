@@ -24,54 +24,44 @@
   <!--Tabs-->
 
   <!-- itemsAvailable -->
+  <!-- <h1>{{ hackingProducts|length}}</h1> -->
 <section class="itemsAvailable">
+
+
     <div class="sellingOutfits subPage">
       <h3>Hacker's Outfits</h3>
       <div class="shopItems">
-
-        <div class="shopItem item1">
-          <span class="itemName">Hacker's Hat</span>
-          <img src="{{ url_for('static', filename='img/shop/hackingHat.jpg') }}" alt="Hacking Hat's pic">
-          <div class="shopItemDetails">
-            <span class="itemPrice">S$9.99</span>
-            <button type="button" class="addToCart">Add To Cart</button>
-          </div>
-        </div>
-
-        <div class="shopItem item2">
-          <span class="itemName">Hacker's Hoodie</span>
-          <img src="{{ url_for('static', filename='img/shop/hackingHoodie.jpg') }}" alt="Hacking Hoodie's pic">
-          <div class="shopItemDetails">
-            <span class="itemPrice">S$29.99</span>
-            <button type="button" class="addToCart">Add To Cart</button>
-          </div>
-        </div>
-
-      </div> <!-- End of shopItems page -->
+        {% for hackingProduct in hackingProducts %}
+          {% if hackingProduct.category == "outfits" %}
+            <div class="shopItem item1">
+              <span class="itemName">{{hackingProduct.title}}</span>
+              <img src="{{url_for('static', filename='shop/'+hackingProduct.image_file)}}" alt="{{hackingProduct.title}}">
+              <div class="shopItemDetails">
+                <span class="itemPrice">S${{hackingProduct.price}}</span>
+                <a href="{{ url_for('addToCart', item_id=hackingProduct.id) }}" class="addToCart" >Add To Cart</a>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
     </div> <!-- End of sellingOutfits page -->
 
+
     <div class="sellingTools subPage">
-      <h3>Hacker's Tools</h3>
+      <h3>Hacker's Tool</h3>
       <div class="shopItems">
-
-        <div class="shopItem item1">
-          <span class="itemName">Pi Zero W</span>
-          <img src="{{ url_for('static', filename='img/shop/hackingToolPi.jpg') }}" alt="Pi Zero's pic">
-          <div class="shopItemDetails">
-            <span class="itemPrice">S$19.99</span>
-            <button type="button" class="addToCart">Add To Cart</button>
-          </div>
-        </div>
-
-        <div class="shopItem item2">
-          <span class="itemName">Arduino</span>
-          <img src="{{ url_for('static', filename='img/shop/hackingToolAd.jpg') }}" alt="Arduino's pic">
-          <div class="shopItemDetails">
-            <span class="itemPrice">S$9.99</span>
-            <button type="button" class="addToCart">Add To Cart</button>
-          </div>
-        </div>
-
+        {% for hackingProduct in hackingProducts %}
+          {% if hackingProduct.category == "tools" %}
+            <div class="shopItem item1">
+              <span class="itemName">{{hackingProduct.title}}</span>
+              <img src="{{url_for('static', filename='shop/'+hackingProduct.image_file)}}" alt="{{hackingProduct.title}}">
+              <div class="shopItemDetails">
+                <span class="itemPrice">S${{hackingProduct.price}}</span>
+                <a href="{{ url_for('addToCart', item_id=hackingProduct.id) }}" class="addToCart" >Add To Cart</a>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
       </div> <!-- End of shopItems page -->
     </div> <!-- Endo of sellingTools page -->
 </section>

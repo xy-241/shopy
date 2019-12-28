@@ -6,7 +6,7 @@ from flask import request # Obtain the route in the url, check what type the req
 
 from shopyP import app, db, bcrypt
 from shopyP.forms import RegistrationForm, LoginForm, UpdateAccountForm
-from shopyP.models import User, Admin, CartItem
+from shopyP.models import User, Admin, CartItem, HackingProduct
 
 from flask_login import login_user, current_user, logout_user, login_required # Login Users in, to indicate users already login in, log user out, making sure users cant access certain pages before they login
 
@@ -17,7 +17,8 @@ from PIL import Image # TO compress the pic
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home.html', title='Home')
+    hackingProducts = HackingProduct.query.all()
+    return render_template('home.html', title='Home', hackingProducts=hackingProducts)
 
 @app.route('/about')
 def about():
@@ -122,3 +123,7 @@ def admin_login():
 @login_required
 def cart():
     return render_template('user/cart.html', title="Cart")
+
+@app.route("/addToCart/<int:item_id>")
+def addToCart(item_id):
+    return redirect(url_for('home'))

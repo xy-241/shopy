@@ -48,6 +48,7 @@ class HackingProduct(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Float, nullable=False)
+    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     date_added = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     description = db.Column(db.Text, nullable=False)
     category = db.Column(db.String(100), nullable=False)
