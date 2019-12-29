@@ -22,7 +22,7 @@ login_manager.login_message_category = 'info' # Bootstrap class, so the end resu
 # For Login-Auth
 from shopyP import routes
 # from flask_login import UserMixin # used for login-auth, To satisfy the login_manager requirements
-# from datetime import  datetime
+# from datetime import datetime
 # class User(db.Model, UserMixin):
 #     id = db.Column(db.Integer, primary_key=True)
 #     username = db.Column(db.String(20), unique=True, nullable=False)
@@ -33,26 +33,6 @@ from shopyP import routes
 #
 #     def __repr__(self):
 #         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
-# # Cart item
-# class CartItem(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     title = db.Column(db.String(100), nullable=False)
-#     price = db.Column(db.Float)
-#     date_added = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-#     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-# # Hacking products to sell
-# class HackingProduct(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     title = db.Column(db.String(100), nullable=False)
-#     price = db.Column(db.Float, nullable=False)
-#     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
-#     date_added = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-#     description = db.Column(db.Text, nullable=False)
-#     category = db.Column(db.String(100), nullable=False)
-#
-#
-#     def __repr__(self):
-#         return f"CartItem('{self.title}', 'S${self.price}', 'Date added:{self.date_added}')"
 # # Class format for admin
 # class Admin(db.Model, UserMixin):
 #     id = db.Column(db.Integer, primary_key=True)
@@ -60,6 +40,30 @@ from shopyP import routes
 #     email = db.Column(db.String(120), unique=True, nullable=False)
 #     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
 #     password = db.Column(db.String(60), nullable=False)
-#
 #     def __repr__(self):
 #         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
+# # Cart item
+# class CartItem(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     title = db.Column(db.String(100), nullable=False)
+#     price = db.Column(db.Float)
+#     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+#     date_added = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+#     itemNum = db.Column(db.Integer, nullable=False)
+#     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+#
+#     def __repr__(self):
+#         return f"CartItem('{self.title}', 'S${self.price}', 'Date added:{self.date_added}')"
+#
+# # Hacking products to sell
+# class HackingProduct(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     title = db.Column(db.String(100), nullable=False, unique=True)
+#     price = db.Column(db.Float, nullable=False)
+#     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+#     date_added = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+#     description = db.Column(db.Text, nullable=False)
+#     category = db.Column(db.String(100), nullable=False)
+#
+#     def __repr__(self):
+#         return f"CartItem('{self.title}', 'S${self.price}', 'Date added:{self.date_added}')"

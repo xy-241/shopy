@@ -10,6 +10,8 @@ from shopyP.models import User, Admin, CartItem, HackingProduct
 
 from flask_login import login_user, current_user, logout_user, login_required # Login Users in, to indicate users already login in, log user out, making sure users cant access certain pages before they login
 
+from sqlalchemy import and_
+
 import secrets # Give the picture a random index
 import os # To get the extension of the picture
 from PIL import Image # TO compress the pic
@@ -122,8 +124,23 @@ def admin_login():
 @app.route("/cart")
 @login_required
 def cart():
-    return render_template('user/cart.html', title="Cart")
+    cartItems = CartItem.query.filter(CartItem.owner_id == current_user.id)
+    return render_template('user/cart.html', title="Cart", cartItems=cartItems)
 
 @app.route("/addToCart/<int:item_id>")
+@login_required
 def addToCart(item_id):
-    return redirect(url_for('home'))
+    itemInfo = HackingProduct.query.filter_by(id=item_id).first()
+
+    cartItem = CartItem.query.filter(and_(CartItem.title == itemInfo.title, CartItem.owner_id == current_user.id)).first()
+
+    if cartItem:
+        cartItem.itemNum += 1
+        db.session.commit()
+    else:
+        cartItem = CartItem(title=itemInfo.title, price=itemInfo.price, image_file=itemInfo.image_file, owner=current_user, itemNum=1)
+        db.session.add(cartItem)
+        db.session.commit()
+
+    hackingProducts = HackingProduct.query.all()
+    return render_template('user/itemAddedModel.html', title='Item Added', hackingProducts=hackingProducts)

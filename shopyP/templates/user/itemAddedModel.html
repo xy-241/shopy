@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 
 {% block cssJs %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
-  <script src="{{ url_for('static', filename='js/home.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+  <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 {% endblock cssJs %}
 
 {% block header%}
 <div class="banner">
-  <img src="{{ url_for('static', filename='img/hacking2.jpg') }}" alt="">
+  <img src="{{ url_for('static', filename='img/hacking2.jpg') }}" alt="banner">
   <div class="background"></div>
   <h2>Hacker's Shop</h2>
 </div>
@@ -38,7 +38,7 @@
               <img src="{{url_for('static', filename='shop/'+hackingProduct.image_file)}}" alt="{{hackingProduct.title}}">
               <div class="shopItemDetails">
                 <span class="itemPrice">S${{hackingProduct.price}}</span>
-                <a href="{{ url_for('addToCart', item_id=hackingProduct.id) }}#afterModal" class="addToCart" >Add To Cart</a>
+                <a href="{{ url_for('addToCart', item_id=hackingProduct.id) }}" class="addToCart" >Add To Cart</a>
               </div>
             </div>
           {% endif %}
@@ -57,7 +57,7 @@
               <img src="{{url_for('static', filename='shop/'+hackingProduct.image_file)}}" alt="{{hackingProduct.title}}">
               <div class="shopItemDetails">
                 <span class="itemPrice">S${{hackingProduct.price}}</span>
-                <a href="{{ url_for('addToCart', item_id=hackingProduct.id) }}#afterModal" class="addToCart" >Add To Cart</a>
+                <a href="{{ url_for('addToCart', item_id=hackingProduct.id) }}" class="addToCart" >Add To Cart</a>
               </div>
             </div>
           {% endif %}
@@ -99,7 +99,7 @@
 <section class="addToCartModal">
   <div class="modalContent">
     <div class="modalHeader">
-      <p class="closeBtn">&times;</p>
+      <a class="closeBtn" href="{{ url_for('home')}}#afterModal">&times;</a>
     </div>
     <div class="modalBody">
       <p class="modalBodyHeader">Item Added!</p>

@@ -249,14 +249,14 @@ function removeModal(event){
 function clickOutsideModal(event){
   var area = event.target;
   if(area == window.addToCartModal){
-    window.addToCartModal.style.display = "none";
+    window.addToCartModal.style.display = "block";
   }
+
 }
 function addToCartFunc(event){
-  //MOdal
-
-  // window.addToCartModal.style.display = "block";
-  //MOdal
+  //Modal
+  window.addToCartModal.style.display = "block";
+  //Modal
   var button = event.target;
   var item = button.parentElement.parentElement;
   var itemRow = document.createElement("div");

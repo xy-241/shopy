@@ -75,11 +75,7 @@ for(var i=0; i<storedCartItems.length; i++){
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  //Add to cart
-  var addToCart = document.getElementsByClassName("addToCart");
-  for(var i = 0; i<addToCart.length; i++){
-    addToCart[i].addEventListener("click", addToCartFunc);
-  }
+
 
 
   //NumSelected
@@ -207,90 +203,6 @@ function updateTheCart(){
   checkCartStatus();
   //Check if carts has anything
 
-}
-function addToCartFunc(event){
-  //MOdal
-
-  window.addToCartModal.style.display = "block";
-  //MOdal
-  var button = event.target;
-  var item = button.parentElement.parentElement;
-  var itemRow = document.createElement("div");
-  itemRow.setAttribute("class", "cartItem");
-
-  var itemName = item.getElementsByClassName("itemName")[0].innerText;
-  var src = item.getElementsByTagName("img")[0].src;
-  var itemPrice = item.getElementsByClassName("itemPrice")[0].innerText;
-
-  var cartItems = document.getElementsByClassName("cartItems")[0];
-  var cartItemNames = cartItems.getElementsByClassName("cartItemName");
-
-  //Add 1 to value if item is already inside, and return to quit the function
-  for(var i = 0; i<cartItemNames.length; i++){
-    if(cartItemNames[i].innerText == itemName){
-
-      var currentValue = parseInt(cartItemNames[i].parentElement.getElementsByClassName("cartItemNum")[0].value);
-      cartItemNames[i].parentElement.getElementsByClassName("cartItemNum")[0].value = currentValue+1;
-      updateTheCart();  //Update the cart!!!
-
-      //Local Strong Value changes
-      for(var i=0; i<storedCartItems.length; i++){
-        if(storedCartItems[i]["name"] == itemName){
-          storedCartItems[i]["value"] = parseInt(storedCartItems[i]["value"]) + 1;
-          localStorage.setItem("storedCartItems", JSON.stringify(storedCartItems));
-        }
-      }
-      //Local Strong Value changes
-      return;
-    }
-  }
-
-  var itemContent = `
-    <div class="cartItemDes">
-      <div class="cartItemPic">
-        <img src=${src}>
-      </div>
-
-      <div class="cartItemInfo">
-        <p class="cartItemName">${itemName}</p>
-        <div class="cartItemBuyingInfo">
-          <p class="cartItemPrice">${itemPrice}</p>
-
-          <div class="cartItemNumWrapper">
-            <input type="number" class="cartItemNum" value="1">
-          </div>
-        </div>
-      </div> <!--End of cart Info-->
-    </div> <!--End of cart Des-->
-
-    <button type="button" class="removeButton">Remove</button>
-  `;
-  itemRow.innerHTML = itemContent;
-
-  var cartList = document.getElementsByClassName("cartItems")[0];
-  cartList.append(itemRow);
-
-  //Store to localStorage RMB TO REMOVE when checkout/remove clicked
-  storedCartItems.push({"name": itemName, "price": itemPrice, "src": src, "value": parseInt(cartItemNames[i].parentElement.getElementsByClassName("cartItemNum")[0].value)});
-  localStorage.setItem("storedCartItems", JSON.stringify(storedCartItems));
-  //Store to localStorage RMB TO REMOVE when checkout/remove clicked
-
-  //Give the newly created button an event handler
-  //NumSelected
-  var quantityInputs = document.getElementsByClassName("cartItemNum");
-  for(var i=0; i<quantityInputs.length; i++){
-    quantityInputs[i].addEventListener("change", quantityInputUpdate);
-  }
-  //NumSelected
-  //Remove Button
-  var removeButtons = document.getElementsByClassName("removeButton");
-  for(var i=0; i<removeButtons.length; i++){
-    removeButtons[i].addEventListener("click", removeItemFromCart);
-  }
-  //Remove Button
-
-  updateTheCart()   //Update the cart!!!
-  return;
 }
 
 

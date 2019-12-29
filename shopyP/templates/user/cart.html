@@ -17,17 +17,41 @@
 <!-- shoppingCart -->
 <section class="shoppingCart">
   <h3>Cart</h3>
-  <div class="cartItems">
 
-  </div>
+    <div class="cartItems">
+      {% for cartItem in cartItems %}
+      <div class="cartItem">
+        <div class="cartItemDes">
+          <div class="cartItemPic">
+            <img src="{{url_for('static', filename='shop/'+cartItem.image_file)}}">
+          </div>
 
-  <div class="cartTotal">
-    <p>Total Amount</p>
-    <p class="amountToPay">$0</p>
-  </div>
-  <div class="cartEmpty">
-    <p>Your Cart Is Empty, Buy Some And Be A Hacker!</p>
-  </div>
+          <div class="cartItemInfo">
+            <p class="cartItemName">{{ cartItem.title }}</p>
+            <div class="cartItemBuyingInfo">
+              <p class="cartItemPrice">{{ cartItem.price }}</p>
+
+              <div class="cartItemNumWrapper">
+                <input type="number" class="cartItemNum" value="{{ cartItem.itemNum }}">
+              </div>
+            </div>
+          </div> <!--End of cart Info-->
+        </div> <!--End of cart Des-->
+
+        <button type="button" class="removeButton">Remove</button>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="cartTotal">
+      <p>Total Amount</p>
+      <p class="amountToPay">$0</p>
+    </div>
+
+    <div class="cartEmpty">
+      <p>Your Cart Is Empty, Buy Some And Be A Hacker!</p>
+    </div>
+
 </section>
 <!-- shoppingCart -->
 

@@ -29,7 +29,6 @@ class Admin(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
-
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
 # Cart item
@@ -37,7 +36,9 @@ class CartItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Float)
+    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     date_added = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    itemNum = db.Column(db.Integer, nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
@@ -46,7 +47,7 @@ class CartItem(db.Model):
 # Hacking products to sell
 class HackingProduct(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
+    title = db.Column(db.String(100), nullable=False, unique=True)
     price = db.Column(db.Float, nullable=False)
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     date_added = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
