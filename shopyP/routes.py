@@ -4,6 +4,8 @@ from flask import flash
 from flask import redirect
 from flask import request # Obtain the route in the url, check what type the request is, the page of post the user requests
 
+from flask import jsonify
+
 from shopyP import app, db, bcrypt
 from shopyP.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from shopyP.models import User, Admin, CartItem, HackingProduct
@@ -53,7 +55,9 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
             flash('Login Unsuccessful. Please check username and password', 'danger')
-    return render_template('login.html', form=form, title='Login')
+    data = request.get_json()
+    return data
+    #return render_template('login.html', form=form, title='Login')
 
 @app.route("/logout")
 def logout():

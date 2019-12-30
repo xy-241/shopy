@@ -145,9 +145,7 @@
   padding-top: 2px; /*shopFont2 4px*/  /*Text also responsive*/
   font-size: 1.1em;
 }
-.cartItemNumWrapper{
 
-}
 .cartItemNumWrapper input{
   display: block;
   font-family: text;

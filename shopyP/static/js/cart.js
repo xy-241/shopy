@@ -20,62 +20,6 @@ if(data ==null){
 
 
 function ready(){
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-for(var i=0; i<storedCartItems.length; i++){
-  //Get the 4 types of values from the localStorage
-  var itemName = storedCartItems[i]["name"];
-  var itemPrice = storedCartItems[i]["price"];
-  var src = storedCartItems[i]["src"];
-  var value = storedCartItems[i]["value"];
-
-  //Get the 4 types of values from the localStorage
-
-  var itemRow = document.createElement("div");
-  itemRow.setAttribute("class", "cartItem");
-  var itemContent = `
-    <div class="cartItemDes">
-      <div class="cartItemPic">
-        <img src=${src}>
-      </div>
-
-      <div class="cartItemInfo">
-        <p class="cartItemName">${itemName}</p>
-        <div class="cartItemBuyingInfo">
-          <p class="cartItemPrice">${itemPrice}</p>
-
-          <div class="cartItemNumWrapper">
-            <input type="number" class="cartItemNum" value="${value}">
-          </div>
-        </div>
-      </div> <!--End of cart Info-->
-    </div> <!--End of cart Des-->
-
-    <button type="button" class="removeButton">Remove</button>
-  `;
-  itemRow.innerHTML = itemContent;
-
-  var cartList = document.getElementsByClassName("cartItems")[0];
-  cartList.append(itemRow);
-
-  //Give the newly created button an event handler
-  //NumSelected
-  var quantityInputs = document.getElementsByClassName("cartItemNum");
-  for(var j=0; j<quantityInputs.length; j++){
-    quantityInputs[j].addEventListener("change", quantityInputUpdate);
-  }
-  //NumSelected
-  //Remove Button
-  var removeButtons = document.getElementsByClassName("removeButton");
-  for(var j=0; j<removeButtons.length; j++){
-    removeButtons[j].addEventListener("click", removeItemFromCart);
-  }
-  //Remove Button
-}
-  updateTheCart()   //Update the cart!!!
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
   //NumSelected
