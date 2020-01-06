@@ -22,7 +22,7 @@
       {{ form.hidden_tag() }}
 
       <fieldset class="form-group">
-        <legend class="border-bottom mb-4">Log In</legend>
+        <legend class="border-bottom mb-4 shopFontTitle">Log In</legend>
         <div class="form-group">
           {{ form.email.label(class="form-control-label") }}
           {% if form.email.errors %}
@@ -58,7 +58,7 @@
         {{ form.submit(class="btn btn-outline-info") }}
       </div>
       <small class="text-muted">
-        <a class="text-primary" href="#">Forgot Password?</a>
+        <a class="text-primary" href="{{ url_for('reset_request') }}">Forgot Password?</a>
       </small>
   </form>
   </div>

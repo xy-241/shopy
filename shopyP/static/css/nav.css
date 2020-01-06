@@ -6,6 +6,7 @@
 }
 .sideNav{
   display: block;
+  font-family: shopFont2;
 }
 .navMain{
   background-color: #262729;
@@ -116,6 +117,7 @@
 
 .sideNav{
   display:none; /*Does not leave white space*/
+
 }
 .sideNav ul{
   display: flex;
@@ -137,8 +139,8 @@
 
   transition: all 0.5s ease-in-out; /*#####*/
 
-  font-family: monospace;
-  font-weight: 400;
+  font-family: shopFont2;
+  /* font-weight: 400; */
   font-size: 1.3em;
 }
 .sideNav ul li a{

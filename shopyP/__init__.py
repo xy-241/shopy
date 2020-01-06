@@ -5,7 +5,9 @@ from flask_sqlalchemy import SQLAlchemy # Import the database
 from flask_bcrypt import Bcrypt # Used to hash passwords
 from flask_login import LoginManager
 # For Login-Auth
-#
+
+from flask_mail import Mail # To reset email
+import os # To reset email
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '3a932a420ff2da48766d5c5040468bf0'
 
@@ -20,6 +22,15 @@ login_manager = LoginManager(app) # Instance
 login_manager.login_view = 'login' # So user can be redirected back to the login page when they try to access unathorised page
 login_manager.login_message_category = 'info' # Bootstrap class, so the end result looks better
 # For Login-Auth
+
+# To reset password
+app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.environ.get('EMAIL')
+app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASSWORD')
+mail = Mail(app)
+# To reset password
 from shopyP import routes
 # from flask_login import UserMixin # used for login-auth, To satisfy the login_manager requirements
 # from datetime import datetime

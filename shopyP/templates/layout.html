@@ -39,17 +39,22 @@
     </div>
 
     {% if current_user.is_authenticated %}
-      {% if title == "Cart" %}
-        <div class="logoPosition">
-          <a  href="{{ url_for('home') }}" class="shopLogo">
-          </a>
-        </div>
+
+      {% if current_user.id >= 10000000000 %}
       {% else %}
-      <div class="logoPosition">
-        <a  href="{{ url_for('cart') }}" class="shopCartLogo">
-        </a>
-      </div>
+        {% if title == "Cart" %}
+          <div class="logoPosition">
+            <a  href="{{ url_for('home') }}" class="shopLogo">
+            </a>
+          </div>
+        {% else %}
+          <div class="logoPosition">
+            <a  href="{{ url_for('cart') }}" class="shopCartLogo">
+            </a>
+          </div>
+        {% endif %}
       {% endif %}
+
     {% endif %}
 
 
@@ -58,25 +63,54 @@
     <nav class="sideNav">
       <ul>
         <!-- The different page links -->
-        {% if title == 'Home' %}
-          <li>
-            <a href="{{url_for('home')}}" id="first" class='onNavPage'>Home</a>
-          </li>
-        {% else %}
-          <li>
-            <a href="{{url_for('home')}}" id="first" >Home</a>
-          </li>
-        {% endif %}
-
         {% if current_user.is_authenticated %}
-          {% if title == 'Account'%}
+          {% if current_user.id >= 10000000000 %}
+          {% else %}
+            {% if title == 'Home' %}
+              <li>
+                <a href="{{url_for('home')}}" id="first" class='onNavPage'>Home</a>
+              </li>
+            {% else %}
+              <li>
+                <a href="{{url_for('home')}}" id="first" >Home</a>
+              </li>
+            {% endif %}
+          {% endif %}
+
+        {% else %}
+          {% if title == 'Home' %}
             <li>
-              <a href="{{ url_for('account') }}" class='onNavPage'>Account</a>
+              <a href="{{url_for('home')}}" id="first" class='onNavPage'>Home</a>
             </li>
           {% else %}
             <li>
-              <a href="{{ url_for('account') }}">Account</a>
+              <a href="{{url_for('home')}}" id="first" >Home</a>
             </li>
+          {% endif %}
+        {% endif %} <!-- End of auth home -->
+
+        {% if current_user.is_authenticated %}
+
+          {% if current_user.id >= 10000000000 %}
+            {% if title == 'Account'%}
+              <li>
+                <a href="{{ url_for('account') }}" class='onNavPage' id='first'>Account</a>
+              </li>
+            {% else %}
+              <li>
+                <a href="{{ url_for('account') }}" id='first'>Account</a>
+              </li>
+            {% endif %}
+          {% else %}
+            {% if title == 'Account'%}
+              <li>
+                <a href="{{ url_for('account') }}" class='onNavPage'>Account</a>
+              </li>
+            {% else %}
+              <li>
+                <a href="{{ url_for('account') }}">Account</a>
+              </li>
+            {% endif %}
           {% endif %}
 
           {% if current_user.id >= 10000000000 %}
@@ -115,20 +149,23 @@
             <a href="{{ url_for('logout')}}">Logout</a>
           </li>
 
-          <div class="sideCart">
-            <li>
-              {% if title == 'Cart' %}
-                <a  href="{{ url_for('home') }}" class="shopLogo">
+          {% if current_user.id >= 10000000000 %}
+          {% else %}
+            <div class="sideCart">
+              <li>
+                {% if title == 'Cart' %}
+                  <a  href="{{ url_for('home') }}" class="shopLogo">
+                  </a>
+                {% else %}
+                <a  href="{{ url_for('cart') }}" class="shopCartLogo">
                 </a>
-              {% else %}
-              <a  href="{{ url_for('cart') }}" class="shopCartLogo">
-              </a>
-              {% endif %}
-            </li>
-          </div>
-          <div class="sideCart">
-            <li></li>
-          </div>
+                {% endif %}
+              </li>
+            </div>
+            <div class="sideCart">
+              <li></li>
+            </div>
+          {% endif %}
 
 
 

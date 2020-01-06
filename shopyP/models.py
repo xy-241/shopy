@@ -2,6 +2,10 @@ from datetime import datetime
 from shopyP import db, login_manager # database instance, login-auth instance
 from flask_login import UserMixin # used for login-auth, To satisfy the login_manager requirements
 
+# To reset password
+from shopyP import app
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer # To reset user password with email
+# To reset password
 
 @login_manager.user_loader # Decorator used to find the user id, so we can perform a match and carry on
 def load_user(user_id):
@@ -19,6 +23,20 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
     cart = db.relationship('CartItem', backref='owner')
+
+    def get_reset_token(self, expires_sec=1800):
+        s = Serializer(app.config['SECRET_KEY'], expires_sec)
+        return s.dumps({'user_id': self.id}).decode('utf-8')
+
+    @staticmethod # Telling the python not to take self as a paramenter
+    def verify_reset_token(token):
+        s = Serializer(app.config['SECRET_KEY'])
+        # Incase the token is expired
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"

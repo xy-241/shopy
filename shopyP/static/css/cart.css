@@ -162,6 +162,14 @@
   box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.2);
 }
 
+.cartItemNum{
+  width:52px;
+  height:32px;
+
+  font-family: text;
+  font-size: 1.3em;
+}
+
 .cartTotal{
   display: flex;
   justify-content: flex-end;

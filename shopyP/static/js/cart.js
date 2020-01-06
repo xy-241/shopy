@@ -52,6 +52,7 @@ function ready(){
     document.getElementsByClassName("cartEmpty")[0].style.display = "none";
   }
   //Check if carts has anything
+  updateTheCart();
 }
 
 /*
@@ -96,13 +97,29 @@ function removeItemFromCart(event){
 
   //Remove items away from the local storage
   var cartItemName = button.parentElement.getElementsByClassName("cartItemName")[0].innerText;
-  for(var i=0; i<storedCartItems.length; i++){
-    if(storedCartItems[i]["name"] == cartItemName){
-      storedCartItems.splice(i,1);
-      localStorage.setItem("storedCartItems", JSON.stringify(storedCartItems));
-    }
+  var entry = {
+    title: cartItemName
   }
-  //Remove items away from the local storage
+
+  fetch(`${window.origin}/cart/removeItem`, {
+    method: 'POST',
+    credentials: "include",
+    body: JSON.stringify(entry),
+    cache: "no-cache",
+    headers: new Headers({
+      "content-type": "application/json"
+    })
+  })
+  .then(function (response){
+    if (response.status !== 200 ){
+      console.log(`Response status was not 200: ${response.status}`);
+      return;
+    }
+    response.json().then(function (data){
+      console.log(data);
+    })
+  })
+
   button.parentElement.remove();
   updateTheCart();
 }
@@ -115,16 +132,32 @@ function quantityInputUpdate(event){
     button.value = 1;
   }
   var roundedValue = Math.round(button.value);
-  button.value = roundedValue;
-  //Making sure changes to cart items are recorded back to the localStorage
   var itemName = button.parentElement.parentElement.parentElement.getElementsByClassName("cartItemName")[0].innerText;
-  for(var i=0; i<storedCartItems.length; i++){
-    if(storedCartItems[i]["name"] == itemName){
-      storedCartItems[i]["value"] = button.value;
-      localStorage.setItem("storedCartItems", JSON.stringify(storedCartItems));
-    }
+
+  var entry = {
+    title: itemName,
+    value: roundedValue
   }
-  storedCartItems
+
+  fetch(`${window.origin}/cart/valueUpdate`, {
+    method: 'POST',
+    credentials: "include",
+    body: JSON.stringify(entry),
+    cache: "no-cache",
+    headers: new Headers({
+      "content-type": "application/json"
+    })
+  })
+  .then(function (response){
+    if (response.status !== 200 ){
+      console.log(`Response status was not 200: ${response.status}`);
+      return;
+    }
+    response.json().then(function (data){
+      console.log(data);
+    })
+
+  })
   updateTheCart();
 }
 
