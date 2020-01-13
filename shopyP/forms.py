@@ -7,6 +7,7 @@ from flask_login import current_user # Indicate current user
 
 from shopyP.models import User, Admin
 
+
 class RegistrationForm(FlaskForm):
     username = StringField('Username',  #Username is shown in html, the label method
                             validators=[DataRequired(), Length(min=2, max=20)])

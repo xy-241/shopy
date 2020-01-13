@@ -306,7 +306,7 @@
   padding-top: 75px;
   padding-bottom: 75px;
 
-  box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0px 3px 1px rgba(0, 0, 0, 0.2);
 }
 .itemName{
   font-family: shopFont2;
@@ -319,7 +319,7 @@
   display: block;
 
   margin:  auto;
-  box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0px 2px 1px rgba(0, 0, 0, 0.2);
 }
 .itemPrice{
   font-family: shopFont2;
@@ -475,7 +475,7 @@ button{
 
 @media only screen and (min-width: 1000px){
 
-  
+
   .workContent{
     display: block !important;
     padding-top: 0px;

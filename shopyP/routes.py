@@ -110,10 +110,19 @@ def delete_user():
         user = Admin.query.filter_by(id=current_user.id).first()
     else:
         user = User.query.filter_by(id=current_user.id).first()
+
+    cartItems = CartItem.query.filter(CartItem.owner_id == current_user.id)
+    if cartItems:
+        for cartItem in cartItems:
+            db.session.delete(cartItem)
+            db.session.commit()
+
     db.session.delete(user)
     db.session.commit()
+
     flash("You account has been deleted!", 'success')
     return redirect(url_for('register'))
+
 @app.route("/admin", methods=['GET', 'POST'])
 def admin_login():
     if current_user.is_authenticated:
@@ -170,7 +179,7 @@ def removeItem():
 def addToCart(item_id):
     if current_user.id >= 10000000000:
         return redirect(url_for('account'))
-    
+
     itemInfo = HackingProduct.query.filter_by(id=item_id).first()
 
     cartItem = CartItem.query.filter(and_(CartItem.title == itemInfo.title, CartItem.owner_id == current_user.id)).first()
