@@ -174,14 +174,15 @@ def removeItem():
     res = make_response(jsonify({"message": "JSON received"}), 200)
     return res
 
-@app.route("/addToCart/<int:item_id>")
+@app.route("/addToCart/item", methods=["POST"])
 @login_required
-def addToCart(item_id):
+def addItem():
     if current_user.id >= 10000000000:
         return redirect(url_for('account'))
 
-    itemInfo = HackingProduct.query.filter_by(id=item_id).first()
+    req = request.get_json()
 
+    itemInfo = HackingProduct.query.filter_by(title=req["title"]).first()
     cartItem = CartItem.query.filter(and_(CartItem.title == itemInfo.title, CartItem.owner_id == current_user.id)).first()
 
     if cartItem:
@@ -191,9 +192,9 @@ def addToCart(item_id):
         cartItem = CartItem(title=itemInfo.title, price=itemInfo.price, image_file=itemInfo.image_file, owner=current_user, itemNum=1)
         db.session.add(cartItem)
         db.session.commit()
+    res = make_response(jsonify({"message": "JSON received"}), 200)
+    return res
 
-    hackingProducts = HackingProduct.query.all()
-    return render_template('user/itemAddedModel.html', title='Item Added', hackingProducts=hackingProducts)
 
 # To reset password
 def send_reset_email(user):

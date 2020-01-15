@@ -195,9 +195,7 @@
 .homeFooter p{
   font-family: shopFont2;
 }
-.copyright{
-  font-family: shopFont2;
-}
+
 
 /*Nav / footer*/
 .workContent{  /*== homeContent*/
@@ -329,7 +327,7 @@
 
   font-size: 1.2em;
 }
-.addToCart{
+.addToCart, .addToCartN{
   font-family: shopFont2;
   background-color: rgba(230, 231, 232, 0.24);
   border:none;
@@ -347,7 +345,7 @@
   color:black;
   text-decoration: none !important;
 }
-.addToCart:hover{
+.addToCart:hover, .addToCartN:hover{
   background-color: black;
   color:rgba(230, 231, 232, 1);
   transition: all 0.4s ease-in-out;

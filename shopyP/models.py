@@ -58,7 +58,7 @@ class Admin(db.Model, Person, UserMixin):
 # Parent Class for the CartItem, HackingProduct
 class GeneralGoods():
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
+
     price = db.Column(db.Float)
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     date_added = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
@@ -67,6 +67,7 @@ class GeneralGoods():
         return f"GeneralGoods('{self.title}', 'S${self.price}', 'Date added:{self.date_added}')"
 # Cart item
 class CartItem(db.Model, GeneralGoods):
+    title = db.Column(db.String(100), nullable=False)
     itemNum = db.Column(db.Integer, nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
@@ -75,6 +76,7 @@ class CartItem(db.Model, GeneralGoods):
 
 # Hacking products to sell
 class HackingProduct(db.Model, GeneralGoods):
+    title = db.Column(db.String(100), nullable=False, unique=True)
     description = db.Column(db.Text, nullable=False)
     category = db.Column(db.String(100), nullable=False)
 

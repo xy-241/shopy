@@ -205,14 +205,14 @@
 }
 .copyright{
   padding-top: 50px;
-  font-size: 0.7em;
-
-  font-family: monospace;
-
+  font-size: 0.8em;
 }
 /*Content*/
 
 
+.copyright{
+  font-family: shopFont2;
+}
 
 /*Responsive*/
 @media only screen and (min-width: 1000px){
@@ -303,9 +303,8 @@
 
   }
   .copyright{
-    font-size: .8em;
     padding-top: 164px;
-
+    margin-bottom: 10px;
   }
   .onPage{
     color:white;
