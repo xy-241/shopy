@@ -182,14 +182,8 @@
 
   text-align: center;
 }
-.homeFooter p{
-  cursor: pointer;
-  font-family: monospace;
-  font-size: 1.3em;
-}
-.homeFooter1, .homeFooter2, .homeFooter0, .homeFooter3, .homeFooter4{
-  margin-bottom: 8px;
-}
+
+
 .onPage{
   color:grey;
 
@@ -202,7 +196,34 @@
 }
 .backToTop{
   margin-bottom: 20px;
+  font-family: shopFont2 !important;
 }
+
+.footerMainInfo h3{
+  font-family: shopFont2;
+}
+.footerMainInfo p{
+  font-family: text;
+}
+
+.twoPlatform{
+  padding-bottom: 80px;
+  display: flex;
+  justify-content: center;
+}
+.twoPlatform a{
+  margin-right: 18px;
+  margin-left: 18px;
+  display: block;
+  height:24px;
+
+}
+
+.insta:hover, .github:hover, .myWeb:hover, .myLinkedin:hover{
+  transform:  rotate(5deg) translate(0px, -15px) scale(1.1,1.1);
+  transition: all 0.3s ease-in-out;
+}
+
 .copyright{
   padding-top: 50px;
   font-size: 0.8em;
@@ -293,17 +314,33 @@
   }
 
   .footerSelection{
-    display:flex;
-    flex-direction: row;
+    visibility: hidden;
+      display:none;
+      flex-direction: row;
+      justify-content: center;
+    }
+    .backToTop{
+    margin-bottom: 20px;
+
+    }
+
+  .footerMainInfo{
+    display: flex;
     justify-content: center;
+    height: 100%;
   }
+  .footerMainInfo p{
+    font-size: 0.8em;
+  }
+
+
   .footerSelection p{
     padding-left: 20px;
     padding-right: 20px;
 
   }
   .copyright{
-    padding-top: 164px;
+    padding-top: 70px;
     margin-bottom: 10px;
   }
   .onPage{
@@ -311,5 +348,13 @@
 
 
 
+  }
+  .footerBlock{
+    margin-left: 60px;
+    margin-right: 60px;
+    width:33.3333%;
+  }
+  .footerMainInfo p{
+    font-size: 1.2em;
   }
 }

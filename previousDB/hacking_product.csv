@@ -1,0 +1,5 @@
+id,title,price,image_file,date_added,description,category
+1,Hacker's Hat,9.99,hackingHat.jpg,2019-09-23 08:15:59.864446,NA,outfits
+2,Hacker's Hoodie,29.99,hackingHoodie.jpg,2019-09-23 08:15:59.864446,NA,outfits
+3,Arduino,19.99,hackingToolAd.jpg,2019-09-23 08:15:59.864446,NA,tools
+4,Pi Zero W,9.99,hackingToolPi.jpg,2019-09-23 08:15:59.864446,NA,tools

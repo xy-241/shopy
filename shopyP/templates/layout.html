@@ -225,37 +225,50 @@
 
     <footer class="homeFooter">
       <div class="footerSelection">
-        <p class="backToTop"><a href="#" >Back To Top</a></p>
+        <p class="backToTop"><a href="#">Back To Top</a></p>
+      </div>
+      <div class="footerMainInfo">
+        <div class="footerBlock">
+          <h3>About Us</h3>
+          <p>We are selling products to make you a real HACKER!!!</p>
+          <p class="twoPlatform">
+            <a href="https://www.instagram.com/xy.yu/" class="insta">
+              <img src="{{ url_for('static', filename='img/footer/instagram-32.ico')}}" alt="insta">
+            </a>
+            <a href="https://github.com/XinYang-YXY?tab=repositories" class="github">
+              <img src="{{ url_for('static', filename='img/footer/github-6-32.ico')}}" alt="github">
+            </a>
+            <a href="https://linkedin.com/in/xinyang-yu" class="myLinkedin">
+              <img src="{{ url_for('static', filename='img/footer/linkedin.ico')}}" alt="linkedin">
+            </a>
+          </p>
+        </div>
+        <div class="footerBlock">
+          <h3>Lead Page</h3>
+          <p>Check the website of the lead out!!!</p>
+          <div class="twoPlatform">
+            <a href="https://yxy.ninja" class="myWeb">
+              <img src="{{ url_for('static', filename='img/footer/website.ico')}}" alt="website">
+            </a>
+          </div>
+        </div>
 
-        {% if title == 'Home'%}
-          <p class="homeFooter0"><a href="{{url_for('home')}}" class='onPage'>Home</a></p>
-        {% else %}
-          <p class="homeFooter0"><a href="{{url_for('home')}}">Home</a></p>
-        {% endif %}
-
-        {% if title == 'Register' %}
-          <p class="homeFooter2"><a href="{{url_for('register')}}" class='onPage'>Register</a></p>
-        {% else %}
-          <p class="homeFooter2"><a href="{{url_for('register')}}" >Register</a></p>
-        {% endif %}
-
-        {% if title == 'Login' %}
-          <p class="homeFooter3"><a href="{{url_for('login')}}" class='onPage'>Login</a></p>
-        {% else %}
-          <p class="homeFooter3"><a href="{{url_for('login')}}">Login</a></p>
-        {% endif %}
-
-
-        {% if title == 'about'%}
-          <p class="homeFooter4"><a href="", class='onPage'>About Us</a></p>
-        {% else %}
-          <p class="homeFooter4"><a href="">About Us</a></p>
-        {% endif %}
-        <p class="homeFooter1"><a href="">PlaceHoder 5</a></p>
+        <div class="footerBlock">
+          <h3>Contact Info</h3>
+          <p>
+            <img src="{{ url_for('static', filename='img/footer/location.ico')}}" alt="locationIcon">
+            Nanyang Polytechnic, 180 Ang Mo Kio Ave 8, Singapore 569830
+          </p>
+          <p>
+            <img src="{{ url_for('static', filename='img/footer/email.ico')}}" alt="emailIcon">
+            yu.xin.yang.yxy@gmail.com
+          </p>
+        </div>
       </div>
 
       <div class="copyright">Copyright  &copy; 2019 YXY. All rights reserved.</div>
     </footer>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

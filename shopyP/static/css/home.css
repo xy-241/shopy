@@ -192,10 +192,6 @@
 }
 
 
-.homeFooter p{
-  font-family: shopFont2;
-}
-
 
 /*Nav / footer*/
 .workContent{  /*== homeContent*/
@@ -347,7 +343,7 @@
 }
 .addToCart:hover, .addToCartN:hover{
   background-color: black;
-  color:rgba(230, 231, 232, 1);
+  color:rgba(230, 231, 232, 1) !important;
   transition: all 0.4s ease-in-out;
 }
 
