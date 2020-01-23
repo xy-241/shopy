@@ -47,7 +47,9 @@ from shopyP import routes
 #         return f"Person('{self.username}', '{self.email}', '{self.image_file}')"
 # # Class format for user
 # class User(db.Model, Person, UserMixin):
+#     deliveryInfo = db.Column(db.Text)
 #     cart = db.relationship('CartItem', backref='owner')
+#
 #
 #
 #
@@ -71,6 +73,17 @@ from shopyP import routes
 # class Admin(db.Model, Person, UserMixin):
 #     def __repr__(self):
 #         return f"Admin('{self.username}', '{self.email}', '{self.image_file}')"
+#
+# class purchaseRecord(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#
+#     title = db.Column(db.String(100), nullable=False)
+#     itemNum = db.Column(db.Integer, nullable=False)
+#     date_added = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+#     review = db.Column(db.Text, default="User didt give any review, 5 stars by default")
+#     rating = db.Column(db.Integer, default=5)
+#
+#     buyerId = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 #
 # # Parent Class for the CartItem, HackingProduct
 # class GeneralGoods():
@@ -96,6 +109,9 @@ from shopyP import routes
 #     title = db.Column(db.String(100), nullable=False, unique=True)
 #     description = db.Column(db.Text, nullable=False)
 #     category = db.Column(db.String(100), nullable=False)
+#
+#     itemNum = db.Column(db.Integer, nullable=False)
+#
 #
 #     def __repr__(self):
 #         return f"HackingProduct('{self.title}', 'S${self.price}', 'Date added:{self.date_added}')"

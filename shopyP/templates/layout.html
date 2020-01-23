@@ -114,6 +114,16 @@
           {% endif %}
 
           {% if current_user.id >= 10000000000 %}
+            {% if title == 'manageUser'%}
+              <li>
+                <a href="#" class='onNavPage'>Users</a>
+              </li>
+            {% else %}
+              <li>
+                <a href="#">Users</a>
+              </li>
+            {% endif %}
+
             {% if title == 'inventory'%}
               <li>
                 <a href="#" class='onNavPage'>Inventory</a>
