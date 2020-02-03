@@ -1,11 +1,11 @@
 from flask_wtf import FlaskForm # wheels made by others
-from wtforms import StringField, PasswordField, SubmitField, BooleanField # for string field, for password field, for submit button, for remember password
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, DecimalField, SelectField, TextAreaField, IntegerField # for string field, for password field, for submit button, for remember password
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError  # Data is required, certain length, verifies email, for confirm password, for ensuring not duplicated values
 
 from flask_wtf.file import FileField, FileAllowed # The type of th field, and what type of file is allowed
 from flask_login import current_user # Indicate current user
 
-from shopyP.models import User, Admin
+from shopyP.models import User, Admin, HackingProduct
 
 
 class RegistrationForm(FlaskForm):
@@ -70,3 +70,28 @@ class ResetPasswordForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password',
                                      validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Reset Password')
+
+# ZiMing
+class addForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired(), Length(min=2, max=20)])
+    price = DecimalField('Price', places=2, rounding=None, use_locale=False, number_format=None, validators=[DataRequired()])
+    itemNum = IntegerField('Stock', validators=[DataRequired()])
+    picture = FileField('Product Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
+    category = SelectField('Category', validators=[DataRequired()], choices=[('outfits', 'Outfit'),('tools', 'Tool')], default='Outfit')
+    description = TextAreaField('Description', validators=[DataRequired()])
+    submit = SubmitField('Add')
+
+    def validate_title(self, title):
+        title = HackingProduct.query.filter_by(title=title.data).first()
+        if title:
+            raise ValidationError("That title is taken. Please choose a different one!")
+
+class updateForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired(), Length(min=2, max=20)])
+    price = DecimalField('Price', places=2, rounding=None, use_locale=False, number_format=None, validators=[DataRequired()])
+    itemNum = IntegerField('Stock', validators=[DataRequired()])
+    picture = FileField('Product Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
+    category = SelectField('Category', validators=[DataRequired()], choices=[('outfits', 'Outfit'),('tools', 'Tool')], default='Outfit')
+    description = TextAreaField('Description', validators=[DataRequired()])
+    submit = SubmitField('Update')
+# ZiMing

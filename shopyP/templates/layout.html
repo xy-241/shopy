@@ -116,21 +116,21 @@
           {% if current_user.id >= 10000000000 %}
             {% if title == 'manageUser'%}
               <li>
-                <a href="#" class='onNavPage'>Users</a>
+                <a href="{{url_for('manageUser')}}" class='onNavPage'>Users</a>
               </li>
             {% else %}
               <li>
-                <a href="#">Users</a>
+                <a href="{{url_for('manageUser')}}">Users</a>
               </li>
             {% endif %}
 
             {% if title == 'inventory'%}
               <li>
-                <a href="#" class='onNavPage'>Inventory</a>
+                <a href="{{url_for('inventory')}}" class='onNavPage'>Inventory</a>
               </li>
             {% else %}
               <li>
-                <a href="#">Inventory</a>
+                <a href="{{url_for('inventory')}}">Inventory</a>
               </li>
             {% endif %}
 

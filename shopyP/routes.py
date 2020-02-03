@@ -7,7 +7,7 @@ from flask import request # Obtain the route in the url, check what type the req
 from flask import jsonify, make_response
 
 from shopyP import app, db, bcrypt, mail
-from shopyP.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
+from shopyP.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm, addForm, updateForm
 from shopyP.models import User, Admin, CartItem, HackingProduct
 
 from flask_mail import Message # To reset password
@@ -240,3 +240,121 @@ def reset_token(token):
         return redirect(url_for('login'))
     return render_template('user/reset_token.html', title='Reset Password', form=form)
 # To reset password
+
+@app.route("/manageUser", methods=['GET', 'POST'])
+def manageUser():
+    if current_user.is_authenticated:
+        if current_user.id >= 10000000000:
+            users = User.query.all()
+            return render_template('admin/manageUser.html', title='manageUser', users=users)
+        else:
+            flash('Authorized Access Only!', 'warning')
+            return redirect(url_for('account'))
+    else:
+        flash('Authorized Access Only!', 'warning')
+        return redirect(url_for('admin_login'))
+
+# ZiMing
+def save_Ppicture(form_picture):
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_picture.filename) # Underscore is used to throw away a no useful variable
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, 'static/shop', picture_fn) # Get the absolute path in order to save
+
+    # Compress the picture before saving it
+    output_size =(125, 125)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+
+    i.save(picture_path) # Save the user picture locally
+    return picture_fn
+
+@app.route("/inventory", methods=['GET', 'POST'])
+def inventory():
+    if current_user.is_authenticated:
+        if current_user.id >= 10000000000:
+            hackingProducts = HackingProduct.query.all()
+            return render_template('inventory.html', title='inventory', hackingProducts=hackingProducts)
+        else:
+            flash('Authorized Access Only!', 'warning')
+            return redirect(url_for('account'))
+    else:
+        flash('Authorized Access Only!', 'warning')
+        return redirect(url_for('admin_login'))
+
+
+@app.route("/inventory/new", methods=['GET', 'POST'])
+def new_inventory():
+    if current_user.is_authenticated:
+        if current_user.id >= 10000000000:
+            form = addForm()
+            if form.validate_on_submit():
+                addProduct = HackingProduct(title=form.title.data, price=form.price.data, category=form.category.data, description=form.description.data, itemNum=form.itemNum.data)
+                db.session.add(addProduct)
+                db.session.commit()
+                if form.picture.data:
+                    picture_file = save_Ppicture(form.picture.data)
+                    current = HackingProduct.query.filter_by(title=form.title.data).first()
+                    current.image_file = picture_file
+                    db.session.commit()
+                flash('Your Product has been added!', 'success')
+            return render_template('add_inventory.html', title='inventory', form=form, legend='Add Product')
+        else:
+            flash('Authorized Access Only!', 'warning')
+            return redirect(url_for('account'))
+    else:
+        flash('Authorized Access Only!', 'warning')
+        return redirect(url_for('admin_login'))
+
+
+@app.route("/inventory/<int:Product_id>", methods=['GET', 'POST'])
+def product(Product_id):
+    if current_user.is_authenticated:
+        if current_user.id >= 10000000000:
+            Product = HackingProduct.query.get_or_404(Product_id)
+            form = updateForm()
+            if form.validate_on_submit():
+                Product.title = form.title.data
+                Product.price = form.price.data
+                Product.itemNum = form.itemNum.data
+                Product.category = form.category.data
+                Product.description = form.description.data
+                db.session.commit()
+                if form.picture.data:
+                    picture_file = save_Ppicture(form.picture.data)
+                    current = HackingProduct.query.filter_by(title=form.title.data).first()
+                    current.image_file = picture_file
+                    db.session.commit()
+                flash('Product has been updated!', 'success')
+                return redirect(url_for('inventory', Product_id=Product.id))
+            elif request.method == 'GET':
+                form.title.data = Product.title
+                form.price.data = Product.price
+                form.itemNum.data = Product.itemNum
+                form.category.data = Product.category
+                form.description.data = Product.description
+            image_file = url_for('static', filename='shop/'+HackingProduct.query.filter_by(title=form.title.data).first().image_file)
+            return render_template('change_inventory.html', title='inventory', hackingProduct=Product, form=form, legend='Update Product')
+        else:
+            flash('Authorized Access Only!', 'warning')
+            return redirect(url_for('account'))
+    else:
+        flash('Authorized Access Only!', 'warning')
+        return redirect(url_for('admin_login'))
+
+@app.route("/inventory/<int:Product_id>/delete", methods=['GET', 'POST'])
+def delete_product(Product_id):
+    if current_user.is_authenticated:
+        if current_user.id >= 10000000000:
+            Product = HackingProduct.query.get_or_404(Product_id)
+            db.session.delete(Product)
+            db.session.commit()
+            flash('Product has been deleted!', 'success')
+            return redirect(url_for('inventory'))
+        else:
+            flash('Authorized Access Only!', 'warning')
+            return redirect(url_for('account'))
+    else:
+        flash('Authorized Access Only!', 'warning')
+        return redirect(url_for('admin_login'))
+# ZiMing

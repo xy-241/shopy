@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+
+{% block cssJs %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/inventory.css')}}">
+{% endblock cssJs %}
+
+
+{% block content %}
+<div>
+	{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <section class="p-3 mt-3 preventFloat alert alert-{{ category }}">
+          {{ message }}
+        </section>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+	<legend class="border-bottom mb-4">Inventory<a href="{{ url_for('new_inventory') }}"><button type="button" class="btn btn-secondary" name="update" style='margin-left:83%'>Add Product</button></a></legend>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+				<th></th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Description</th>
+				<th>Stock</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for hackingProduct in hackingProducts %}
+      <tr>
+        <td style='width:100px'><img class='product_img' src="{{url_for('static', filename='shop/'+hackingProduct.image_file)}}" alt="{{hackingProduct.title}}"></td>
+        <td>{{hackingProduct.title}}</td>
+        <td>{{hackingProduct.price}}</td>
+        <td>{{hackingProduct.category}}</td>
+        <td>{{hackingProduct.description}}</td>
+				<td>{{hackingProduct.itemNum}}</td>
+        <td>
+					<a href="{{ url_for('product', Product_id=hackingProduct.id) }}"><button type="button" class="btn btn-primary" name="update">Update</button></a>
+					<button type="button" class="btn btn-danger " data-toggle="modal" data-target="#{{hackingProduct.id}}">Delete</button>
+				</td>
+      </tr>
+			<div class="modal fade" id="{{hackingProduct.id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="deleteModalLabel">Delete {{hackingProduct.id}}?</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<form action="{{ url_for('delete_product', Product_id=hackingProduct.id) }}" method="POST">
+								<input class="btn btn-danger" type="submit" value="Delete">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content %}
