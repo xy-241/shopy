@@ -126,7 +126,7 @@
 
             {% if title == 'inventory'%}
               <li>
-                <a href="{{url_for('inventory')}}" class='onNavPage'>Inventory</a>
+                <a href="{{url_for('inventory')}}" class='onNavPageI'>Inventory</a>
               </li>
             {% else %}
               <li>
@@ -202,11 +202,11 @@
 
           {% if title == 'about'%}
             <li>
-              <a href="#" class='onNavPage'>About Us</a>
+              <a href="{{url_for('aboutUs')}}" class='onNavPage'>About Us</a>
             </li>
           {% else %}
             <li>
-              <a href="#">About Us</a>
+              <a href="{{url_for('aboutUs')}}">About Us</a>
             </li>
           {% endif %}
 

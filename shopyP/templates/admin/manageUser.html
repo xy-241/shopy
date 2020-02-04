@@ -3,11 +3,51 @@
 
 {% block cssJs %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/manageUser.css')}}">
+  <script src="{{ url_for('static', filename='js/admin/manageUser.js') }}"></script>
 {% endblock cssJs %}
 
 
 {% block content %}
-<div class="content-section">
+<div class="content-section intro">
+  <!-- <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <th scope="row">{{user.username}}</th>
+        <td>{{user.email}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table> -->
+  <div class="tableResponsive">
+          <table border=1>
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Operation</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in users %}
+              <tr>
+                <td class="userName">{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td class="userOperation">
+                  <button type="button" class="btn btn-danger removeButton" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                </td>
+
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
 
 </div>
 

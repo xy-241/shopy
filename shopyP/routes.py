@@ -195,6 +195,37 @@ def addItem():
     res = make_response(jsonify({"message": "JSON received"}), 200)
     return res
 
+@app.route("/manageUser", methods=['GET', 'POST'])
+def manageUser():
+    if current_user.is_authenticated:
+        if current_user.id >= 10000000000:
+            users = User.query.all()
+            return render_template('admin/manageUser.html', title='manageUser', users=users)
+        else:
+            flash('Authorized Access Only!', 'warning')
+            return redirect(url_for('account'))
+    else:
+        flash('Authorized Access Only!', 'warning')
+        return redirect(url_for('admin_login'))
+
+@app.route("/manageUser/delete", methods=["POST"])
+def deleteUserA():
+    if current_user.is_authenticated:
+        if current_user.id >= 10000000000:
+            req = request.get_json()
+
+            user = User.query.filter(User.username == req["username"]).first()
+            db.session.delete(user)
+            db.session.commit()
+            res = make_response(jsonify({"message": "JSON received"}), 200)
+            return res
+        else:
+            flash('Authorized Access Only!', 'warning')
+            return redirect(url_for('account'))
+    else:
+        flash('Authorized Access Only!', 'warning')
+        return redirect(url_for('admin_login'))
+
 
 # To reset password
 def send_reset_email(user):
@@ -241,18 +272,6 @@ def reset_token(token):
     return render_template('user/reset_token.html', title='Reset Password', form=form)
 # To reset password
 
-@app.route("/manageUser", methods=['GET', 'POST'])
-def manageUser():
-    if current_user.is_authenticated:
-        if current_user.id >= 10000000000:
-            users = User.query.all()
-            return render_template('admin/manageUser.html', title='manageUser', users=users)
-        else:
-            flash('Authorized Access Only!', 'warning')
-            return redirect(url_for('account'))
-    else:
-        flash('Authorized Access Only!', 'warning')
-        return redirect(url_for('admin_login'))
 
 # ZiMing
 def save_Ppicture(form_picture):
@@ -358,3 +377,9 @@ def delete_product(Product_id):
         flash('Authorized Access Only!', 'warning')
         return redirect(url_for('admin_login'))
 # ZiMing
+
+# Jas
+@app.route("/aboutUs")
+def aboutUs():
+    return render_template('aboutUs.html',title='about')
+# Jas

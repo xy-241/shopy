@@ -3,3 +3,61 @@
   margin: auto;
   width: 80%;
   margin-bottom: 113px;
+}
+.content-section{
+  padding: 0px;
+}
+
+  /*Table */
+  /* .gpaContent{
+    padding-top: 85px;
+  }*/
+
+  .intro h2{
+    text-align: center;
+    font-family: monospace;
+    font-weight:900;
+    font-size: 2.5em;
+    margin-bottom: 40px;
+  }
+
+  .tableResponsive{
+    overflow-x:auto;
+    margin: auto;
+    width: 100%;
+  }
+  .intro table{
+    border-collapse: collapse;
+    font-family: monospace;
+    font-size: 1.28em;
+    width:100%;
+  }
+
+  .intro thead{
+    background-color: #262729;
+    color: white;
+    text-align: center;
+  }
+
+  .intro thead th{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .intro tbody tr:hover{
+    background-color: grey;
+    color:white;
+
+  }
+   .intro td {
+     padding-top: 8px;
+     padding-bottom: 8px;
+     padding-left: 15px;
+   }
+
+   .userOperation{
+     background-color: white;
+     text-align: center;
+   }
+  /*Table */
