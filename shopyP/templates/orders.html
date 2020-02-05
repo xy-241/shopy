@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block cssJs %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/checkoutdelivery.css')}}">
+{% endblock cssJs %}
+
+{% block content %}
+<div class="content-section">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <section class="p-3 mt-3 preventFloat alert alert-{{ category }}">
+          {{ message }}
+        </section>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+    <h1 class="display-4 shopFontTitle">Purchases</h1>
+    <div>
+      <table class="table table-striped">
+          <thead>
+              <tr>
+                  <th>Item(s)</th>
+                  <th>Number</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Review</th>
+                  <th>Rating</th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody>
+          {% if check == 0 %}
+          <tr>
+            <td>You have no past purchases</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          {% endif %}
+          {% for p in purchases %}
+              <tr>
+                  <td>{{ p.title }}</td>
+                  <td>{{ p.itemNum }}</td>
+                  <td>{{ p.date_added }}</td>
+                  <td>Delivered</td>
+                  <td>{{ p.review }}</td>
+                  <td>{{ p.rating }}</td>
+                  <td>
+                    <form action="{{ url_for('deleteOrder', id=p.id) }}" method="POST">
+                      <input type="submit" value="Delete" class="btn btn-danger removeButton" onclick="return confirm('Remove transaction record?');">
+                    </form>
+                  </td>
+
+              </tr>
+          {% endfor %}
+          </tbody>
+      </table>
+      <h4 class="font">Delivered to the address: {{ address }}</h4>
+    </div>
+</div>
+{% endblock %}

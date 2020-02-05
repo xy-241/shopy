@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block cssJs %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/comments.css')}}">
+{% endblock cssJs %}
+
+{% block content %}
+<legend class="border-bottom mb-4">Welcome to the Forums</legend>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <section class="p-3 mt-3 preventFloat alert alert-{{ category }}">
+        {{ message }}
+      </section>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<div class="content-section">
+  <button onclick="window.location.href = '/comments/create';">New Post</button>
+  {% for post in posts %}
+  <article class="media content-section">
+
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="article-title" href="#">{{ post.author.username }}</a>
+        <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+      </div>
+      <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
+      <p class="article-content">{{ post.content }}</p>
+    </div>
+  </article>
+  {% endfor %}
+
+</div>
+
+
+{% endblock content %}

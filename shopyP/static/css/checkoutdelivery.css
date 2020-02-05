@@ -1,0 +1,50 @@
+.workContent {
+  padding-top: 90px;
+}
+.preventFloat {
+  position: None;
+}
+
+.parent {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.child {
+  width: 50%
+}
+
+span.price {
+  float: right;
+  color: grey;
+}
+
+.font {
+  font-family: text;
+}
+
+.removeButton{
+  font-family: shopFont2;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 12px;
+
+  text-align: center;
+
+  background-color: white;
+  border:none;
+  border: 1px black solid;
+  font-size: 1.1em;
+  padding-top: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+
+  box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.5);
+}
+.removeButton:hover{
+  background-color: black;
+  color:rgba(230, 231, 232, 1);
+  transition: all 0.4s ease-in-out;
+}

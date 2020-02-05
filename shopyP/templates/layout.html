@@ -145,6 +145,17 @@
               </li>
             {% endif %}
           {% else %}
+            <!-- JT -->
+            {% if title == 'comment'%}
+              <li>
+                <a href="{{ url_for('comments') }}" class='onNavPage'>Forum</a>
+              </li>
+              {% else %}
+              <li>
+                <a href="{{ url_for('comments') }}">Forum</a>
+              </li>
+            {% endif %}
+            <!-- JT -->
             {% if title == 'about'%}
               <li>
                 <a href="#" class='onNavPage'>About Us</a>
@@ -199,6 +210,18 @@
               <a href="{{url_for('login')}}">Login</a>
             </li>
           {% endif %}
+
+          <!-- JT -->
+          {% if title == 'comment'%}
+            <li>
+              <a href="{{ url_for('comments') }}" class='onNavPage'>Forum</a>
+            </li>
+            {% else %}
+            <li>
+              <a href="{{ url_for('comments') }}">Forum</a>
+            </li>
+          {% endif %}
+          <!-- JT -->
 
           {% if title == 'about'%}
             <li>
@@ -276,7 +299,7 @@
         </div>
       </div>
 
-      <div class="copyright">Copyright  &copy; 2019 YXY. All rights reserved.</div>
+      <div class="copyright">Copyright  &copy; 2019-2020 YXY. All rights reserved.</div>
     </footer>
 
 

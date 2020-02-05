@@ -15,6 +15,16 @@
 
 {% block content %}
 <!-- shoppingCart -->
+<!-- Message Flash (Kenneth) -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <section class="p-3 mt-3 preventFloat alert alert-{{ category }}">
+        {{ message }}
+      </section>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 <section class="shoppingCart">
   <h3>Cart</h3>
 
@@ -56,5 +66,7 @@
 <!-- shoppingCart -->
 
 
-  <button type="button" class="checkout">Checkout</button>
+  <!-- <button type="button" class="checkout">Checkout</button> -->
+  <button type="button" class="checkout" onclick="window.location.href = '{{ url_for('redirectCheckout') }}';">Checkout</button>
+  <button type="button" class="checkout" onclick="window.location.href = '{{ url_for('history') }}';">Purchases</button>
 {% endblock content %}

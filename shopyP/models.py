@@ -33,7 +33,9 @@ class User(db.Model, Person, UserMixin):
     deliveryInfo = db.Column(db.Text)
     cart = db.relationship('CartItem', backref='owner')
 
-
+    #JT
+    posts = db.relationship('Post', backref='author', lazy=True)
+    #JT
 
 
     def get_reset_token(self, expires_sec=1800):
@@ -98,3 +100,16 @@ class HackingProduct(db.Model, GeneralGoods):
 
     def __repr__(self):
         return f"HackingProduct('{self.title}', 'S${self.price}', 'Date added:{self.date_added}')"
+
+
+#Jt
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    date_posted = db.Column(db.DateTime, default=datetime.utcnow)
+    content = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __repr__(self):
+        return f"Post('{self.title}', '{self.date_posted}')"
+#Jt

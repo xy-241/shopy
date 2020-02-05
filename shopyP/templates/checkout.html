@@ -1,0 +1,187 @@
+{% extends "layout.html" %}
+
+{% block cssJs %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/checkoutdelivery.css')}}">
+
+{% endblock cssJs %}
+
+{% block content %}
+  <div class="content-section">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <section class="p-3 mt-3 preventFloat alert alert-{{ category }}">
+            {{ message }}
+          </section>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <div class="parent">
+      <div class="child">
+        <form action="" method="POST">
+          {{ form.hidden_tag() }}
+          <fieldset class="form-group">
+            <legend class="border-bottom mb-4 shopFontTitle">Checkout</legend>
+            <h2>Contact Details</h2>
+            <div class="parent">
+              <div class="child pr-3">
+                <div class="form-group">
+                  {{ form.firstName.label(class="form-control-label") }}
+                  {% if form.firstName.errors %}
+                  {{ form.firstName(class="form-control form-control is-invalid") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.firstName.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ form.firstName(class="form-control form-control") }}
+                  {% endif %}
+                </div>
+              </div>
+              <div class="child pl-3">
+                <div class="form-group">
+                  {{ form.lastName.label(class="form-control-label") }}
+                  {% if form.lastName.errors %}
+                  {{ form.lastName(class="form-control form-control is-invalid") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.lastName.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ form.lastName(class="form-control form-control") }}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              {{ form.email.label(class="form-control-label") }}
+              {% if form.email.errors %}
+              {{ form.email(class="form-control form-control is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.email.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.email(class="form-control form-control") }}
+              {% endif %}
+            </div>
+            <div class="parent">
+              <div class="child">
+                <div class="form-group pr-3">
+                  {{ form.address.label(class="form-control-label") }}
+                  {% if form.address.errors %}
+                  {{ form.address(class="form-control form-control is-invalid") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.address.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ form.address(class="form-control form-control") }}
+                  {% endif %}
+                </div>
+              </div>
+              <div class="child">
+                <div class="form-group pl-3">
+                  {{ form.postal.label(class="form-control-label") }}
+                  {% if form.postal.errors %}
+                  {{ form.postal(class="form-control form-control is-invalid") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.postal.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ form.postal(class="form-control form-control") }}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            <h2>Payment Details</h2>
+            <div class="form-group">
+              {{ form.cardName.label(class="form-control-label") }}
+              {% if form.cardName.errors %}
+              {{ form.cardName(class="form-control form-control is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.cardName.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.cardName(class="form-control form-control") }}
+              {% endif %}
+            </div>
+            <div class="form-group">
+              {{ form.cardNumber.label(class="form-control-label") }}
+              {% if form.cardNumber.errors %}
+              {{ form.cardNumber(class="form-control form-control is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.cardNumber.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.cardNumber(class="form-control form-control") }}
+              {% endif %}
+            </div>
+            <div class="parent">
+              <div class="child pr-3">
+                <div class="form-group">
+                  {{ form.expDate.label(class="form-control-label") }}
+                  {% if form.expDate.errors %}
+                  {{ form.expDate(class="form-control form-control is-invalid") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.expDate.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ form.expDate(class="form-control form-control") }}
+                  {% endif %}
+                </div>
+              </div>
+              <div class="child pl-3">
+                <div class="form-group">
+                  {{ form.cvv.label(class="form-control-label") }}
+                  {% if form.cvv.errors %}
+                  {{ form.cvv(class="form-control form-control is-invalid") }}
+                  <div class="invalid-feedback">
+                    {% for error in form.cvv.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ form.cvv(class="form-control form-control") }}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            <input type="submit" value="Submit" class="btn btn-primary"/>
+          </fieldset>
+        </form>
+      </div>
+      <div class="child pl-4 pt-5">
+        <h4>Cart
+          <span class="price" style="color:black">
+            <i class="fa fa-shopping-cart"></i>
+          </span>
+        </h4>
+        <div class="cartItems">
+            {% for cartItem in cartItems %}
+            <div class="cartItem">
+              <p class="cartItemName">{{ cartItem.itemNum }} x {{ cartItem.title }}<span class="price">S${{ cartItem.price * cartItem.itemNum }}</span></p>
+            </div>
+            {% endfor %}
+        </div>
+        <hr>
+        <div class="cartTotal">
+          <p>Total Amount <span class="price" style="color:black"><b>S${{ sum }}</b></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

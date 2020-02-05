@@ -95,3 +95,23 @@ class updateForm(FlaskForm):
     description = TextAreaField('Description', validators=[DataRequired()])
     submit = SubmitField('Update')
 # ZiMing
+
+# JT
+class PostForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    content = TextAreaField('Content', validators=[DataRequired()])
+    submit = SubmitField('Post')
+# JT
+
+#Checkout Form (Kenneth)
+class CheckoutForm(FlaskForm):
+    firstName = StringField('First Name', validators=[DataRequired()], render_kw={"placeholder": "John"})
+    lastName = StringField('Last Name', validators=[DataRequired()], render_kw={"placeholder": "Doe"})
+    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "johndoe@gmail.com"})
+    address = StringField('Address', validators=[DataRequired()], render_kw={"placeholder": "180 Ang Mo Kio Ave 8"})
+    postal = StringField('Postal Code', validators=[DataRequired()], render_kw={"placeholder": "569830"})
+    cardName = StringField('Name on Card', validators=[DataRequired()], render_kw={"placeholder": "John Doe"})
+    cardNumber = StringField('Card Number', validators=[DataRequired()], render_kw={"placeholder": "1111-2222-3333-4444"})
+    expDate = StringField('Exp Month', validators=[DataRequired()], render_kw={"placeholder": "Apr/25"})
+    cvv = IntegerField('CVV', validators=[DataRequired()], render_kw={"placeholder": "123"})
+#Checkout Form (Kenneth)

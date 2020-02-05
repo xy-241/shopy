@@ -1,14 +1,14 @@
 from flask import render_template # Render templates
 from flask import url_for # So we dont need to worry to import which file
-from flask import flash
+from flask import flash, abort
 from flask import redirect
 from flask import request # Obtain the route in the url, check what type the request is, the page of post the user requests
 
 from flask import jsonify, make_response
 
 from shopyP import app, db, bcrypt, mail
-from shopyP.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm, addForm, updateForm
-from shopyP.models import User, Admin, CartItem, HackingProduct
+from shopyP.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm, addForm, updateForm, CheckoutForm, PostForm
+from shopyP.models import User, Admin, CartItem, HackingProduct, purchaseRecord, Post
 
 from flask_mail import Message # To reset password
 from flask_login import login_user, current_user, logout_user, login_required # Login Users in, to indicate users already login in, log user out, making sure users cant access certain pages before they login
@@ -383,3 +383,143 @@ def delete_product(Product_id):
 def aboutUs():
     return render_template('aboutUs.html',title='about')
 # Jas
+
+
+# JT
+
+@app.route("/comments", methods=['GET', 'POST'])
+def comments():
+     posts = Post.query.all()
+     return render_template('comments.html',title="Forum" , posts=posts)
+
+
+
+@app.route("/comments/create" , methods=['GET','POST'])
+@login_required
+def create_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        print('User', current_user)
+        post = Post(title=form.title.data, content=form.content.data, user_id=current_user.id)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been created!', 'success')
+        return redirect(url_for('comments'))
+    return render_template('create_comments.html', form=form, title="create post", legend="Comments")
+
+@app.route("/comments/<int:post_id>" , methods=['GET', 'POST'])
+def post(post_id):
+    post = Post.query.get_or_404(post_id)
+    return render_template('post.html', post=post, title=post.title)
+
+
+@app.route("/comments<int:post_id>/update" , methods=['GET', 'POST'])
+@login_required
+def update_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    form = PostForm()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.content = form.content.data
+        db.session.commit()
+        flash('Your comment has been updated!', 'success')
+        return redirect(url_for('comments', post_id=post.id))
+    elif request.method == 'GET':
+        form.title.data = post.title
+        form.content.data = post.content
+    return render_template('create_comments.html', title='Update Post',
+                           form=form, legend='Update Post')
+
+@app.route("/comments<int:post_id>/delete", methods=['GET','POST'])
+@login_required
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    db.session.delete(post)
+    db.session.commit()
+    flash('Your post has been deleted!', 'success')
+    return redirect(url_for('comments'))
+
+#have to import abort and Post
+# JT
+#
+
+
+# Ken
+#Redirect Check (Kenneth)
+@app.route("/cart/redirect")
+@login_required
+def redirectCheckout():
+    list = []
+    cartItems = CartItem.query.filter(CartItem.owner_id == current_user.id)
+    for item in cartItems:
+        list.append(item)
+    if len(list) != 0:
+        return redirect(url_for('checkout'))
+    else:
+        return redirect(url_for('cart'))
+#Checkout (Kenneth)
+@app.route("/checkout", methods=['GET', 'POST'])
+@login_required
+def checkout():
+    if current_user.id >= 10000000000:
+        return redirect(url_for('account'))
+    req = request.get_json()
+
+    sum = 0
+    cartItems = CartItem.query.filter(CartItem.owner_id == current_user.id)
+    hackingProducts = HackingProduct.query.all()
+    for item in cartItems:
+        price = item.price * item.itemNum
+        sum += price
+    checkoutForm = CheckoutForm(request.form)
+    if checkoutForm.validate_on_submit():
+        current_user.deliveryInfo = checkoutForm.address.data
+        for item in cartItems:
+            purchase = purchaseRecord(title=item.title, itemNum=item.itemNum, buyerId = current_user.id)
+            db.session.add(purchase)
+            db.session.commit()
+
+        for cartItem in cartItems:
+            for product in hackingProducts:
+                if cartItem.title == product.title:
+                    product.itemNum -= cartItem.itemNum
+
+        if cartItems:
+            for cartItem in cartItems:
+                db.session.delete(cartItem)
+                db.session.commit()
+
+
+        flash('Your order has been successfully submitted!', 'success')
+        return redirect(url_for('cart'))
+    return render_template('checkout.html', title='Checkout', form=checkoutForm, cartItems=cartItems, sum=sum)
+
+#Orderlist (Kenneth)
+@app.route('/orders')
+@login_required
+def history():
+    check = []
+    purchases = purchaseRecord.query.filter(purchaseRecord.buyerId == current_user.id)
+    for purchase in purchases:
+        check.append(purchase)
+    chk = len(check)
+    address = current_user.deliveryInfo
+    product = HackingProduct.query.all()
+
+    return render_template('orders.html', title='Orders', purchases=purchases, address=address, product=product, check=chk)
+#Delete (Kenneth)
+@app.route('/orders/delete/<int:id>/', methods=['POST'])
+def deleteOrder(id):
+    purchases = purchaseRecord.query.filter(purchaseRecord.buyerId == current_user.id)
+    for item in purchases:
+        if item.id == id:
+            db.session.delete(item)
+            db.session.commit()
+            flash('Your order has been deleted!', 'success')
+            return redirect(url_for('history'))
+    return redirect(url_for('history'))
+# Ken
