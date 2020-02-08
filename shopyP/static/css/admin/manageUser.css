@@ -1,11 +1,13 @@
 .workContent{
   padding-top: 90px;
   margin: auto;
-  width: 80%;
+  width: 88%;
   margin-bottom: 113px;
 }
 .content-section{
   padding: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
   /*Table */

@@ -10,6 +10,7 @@ from shopyP import app, db, bcrypt, mail
 from shopyP.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm, addForm, updateForm, CheckoutForm, PostForm
 from shopyP.models import User, Admin, CartItem, HackingProduct, purchaseRecord, Post
 
+
 from flask_mail import Message # To reset password
 from flask_login import login_user, current_user, logout_user, login_required # Login Users in, to indicate users already login in, log user out, making sure users cant access certain pages before they login
 
@@ -112,9 +113,21 @@ def delete_user():
         user = User.query.filter_by(id=current_user.id).first()
 
     cartItems = CartItem.query.filter(CartItem.owner_id == current_user.id)
+    posts = Post.query.filter(Post.user_id == current_user.id)
+    from shopyP.models import purchaseRecord # This is needed, or the purchaseRecord is not defined, confusing
+    purchaseRecords = purchaseRecord.query.filter(purchaseRecord.buyerId == current_user.id)
+    
     if cartItems:
         for cartItem in cartItems:
             db.session.delete(cartItem)
+            db.session.commit()
+    if purchaseRecords:
+        for purchaseRecord in purchaseRecords:
+            db.session.delete(purchaseRecord)
+            db.session.commit()
+    if posts:
+        for post in posts:
+            db.session.delete(post)
             db.session.commit()
 
     db.session.delete(user)
@@ -215,6 +228,27 @@ def deleteUserA():
             req = request.get_json()
 
             user = User.query.filter(User.username == req["username"]).first()
+
+            cartItems = CartItem.query.filter(CartItem.owner_id == user.id)
+            posts = Post.query.filter(Post.user_id == user.id)
+            from shopyP.models import purchaseRecord # This is needed, or the purchaseRecord is not defined, confusing
+            purchaseRecords = purchaseRecord.query.filter(purchaseRecord.buyerId == user.id)
+            
+            if cartItems:
+                for cartItem in cartItems:
+                    db.session.delete(cartItem)
+                    db.session.commit()
+            if purchaseRecords:
+                for purchaseRecord in purchaseRecords:
+                    db.session.delete(purchaseRecord)
+                    db.session.commit()
+            if posts:
+                for post in posts:
+                    db.session.delete(post)
+                    db.session.commit()
+            
+            
+
             db.session.delete(user)
             db.session.commit()
             res = make_response(jsonify({"message": "JSON received"}), 200)
@@ -390,7 +424,7 @@ def aboutUs():
 @app.route("/comments", methods=['GET', 'POST'])
 def comments():
      posts = Post.query.all()
-     return render_template('comments.html',title="Forum" , posts=posts)
+     return render_template('comments.html',title="comment" , posts=posts)
 
 
 
@@ -405,12 +439,12 @@ def create_post():
         db.session.commit()
         flash('Your post has been created!', 'success')
         return redirect(url_for('comments'))
-    return render_template('create_comments.html', form=form, title="create post", legend="Comments")
+    return render_template('create_comments.html', form=form, title="comment", legend="Comments")
 
 @app.route("/comments/<int:post_id>" , methods=['GET', 'POST'])
 def post(post_id):
     post = Post.query.get_or_404(post_id)
-    return render_template('post.html', post=post, title=post.title)
+    return render_template('post.html', post=post, title="comment")
 
 
 @app.route("/comments<int:post_id>/update" , methods=['GET', 'POST'])
@@ -429,7 +463,7 @@ def update_post(post_id):
     elif request.method == 'GET':
         form.title.data = post.title
         form.content.data = post.content
-    return render_template('create_comments.html', title='Update Post',
+    return render_template('create_comments.html', title='comment',
                            form=form, legend='Update Post')
 
 @app.route("/comments<int:post_id>/delete", methods=['GET','POST'])

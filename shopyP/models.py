@@ -36,6 +36,9 @@ class User(db.Model, Person, UserMixin):
     #JT
     posts = db.relationship('Post', backref='author', lazy=True)
     #JT
+    # Ken
+    purchaseRecords = db.relationship('purchaseRecord', backref='buyer')
+    # Ken
 
 
     def get_reset_token(self, expires_sec=1800):
@@ -66,7 +69,7 @@ class purchaseRecord(db.Model):
     itemNum = db.Column(db.Integer, nullable=False)
     date_added = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
-    review = db.Column(db.Text, default="User didt give any review, 5 stars by default")
+    review = db.Column(db.Text, default="User did't give any review, 5 stars by default")
     rating = db.Column(db.Integer, default=5)
     buyerId = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
