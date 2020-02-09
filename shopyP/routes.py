@@ -1,4 +1,4 @@
-from flask import render_template # Render templates
+from flask import render_template, send_file # Render templates
 from flask import url_for # So we dont need to worry to import which file
 from flask import flash, abort
 from flask import redirect
@@ -557,3 +557,7 @@ def deleteOrder(id):
             return redirect(url_for('history'))
     return redirect(url_for('history'))
 # Ken
+
+@app.route('/.well-known/brave-rewards-verification.txt')
+def braveBAT():
+    return send_file('/home/ubuntu/shopy/.well-known/brave-rewards-verification.txt')
