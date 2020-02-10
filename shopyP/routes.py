@@ -314,12 +314,7 @@ def save_Ppicture(form_picture):
     picture_fn = random_hex + f_ext
     picture_path = os.path.join(app.root_path, 'static/shop', picture_fn) # Get the absolute path in order to save
 
-    # Compress the picture before saving it
-    output_size =(125, 125)
-    i = Image.open(form_picture)
-    i.thumbnail(output_size)
-
-    i.save(picture_path) # Save the user picture locally
+    form_picture.save(picture_path) # Save the user picture locally
     return picture_fn
 
 @app.route("/inventory", methods=['GET', 'POST'])
@@ -553,9 +548,23 @@ def deleteOrder(id):
         if item.id == id:
             db.session.delete(item)
             db.session.commit()
-            flash('Your order has been deleted!', 'success')
+            flash('Item checked off list! Enjoy your product!', 'success')
             return redirect(url_for('history'))
     return redirect(url_for('history'))
+#Update Address (Kenneth)
+@app.route('/orders/updateaddress/', methods=['GET', 'POST'])
+@login_required
+def updateAddress():
+    if current_user.id >= 10000000000:
+        return redirect(url_for('account'))
+
+    form = CheckoutForm(request.form)
+    if request.method == 'POST':
+        current_user.deliveryInfo = form.address.data
+        db.session.commit()
+        flash('Address updated!', 'success')
+        return redirect(url_for('history'))
+    return render_template('updateAddress.html', title='Update', form=form)
 # Ken
 
 @app.route('/.well-known/brave-rewards-verification.txt')

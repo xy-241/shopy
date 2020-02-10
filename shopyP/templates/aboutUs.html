@@ -2,7 +2,7 @@
 
 
 {% block cssJs %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/comments.css')}}">
 {% endblock cssJs %}
 
 {% block content %}
@@ -59,7 +59,27 @@
       </div>
     </article>
 
+    <article class="media content-section">
+      <div class="media-body">
+        <div class="article-metadata">
+          <a class="mr-2" href="#">Jerry</a>
+          <small class="text-muted">January 28, 2020</small>
+        </div>
+        <h2><a class="article-title" href="#">Where are you located?</a></h2>
+        <p class="article-content">We are located in Singapore, but we provide international shipping.</p>
+      </div>
+    </article>
 
+    <article class="media content-section">
+      <div class="media-body">
+        <div class="article-metadata">
+          <a class="mr-2" href="#">Samantha</a>
+          <small class="text-muted">January 29, 2020</small>
+        </div>
+        <h2><a class="article-title" href="#">How do I submit a question?</a></h2>
+        <p class="article-content">You can email us at yu.xin.yang.yxy@gmail.com and we will update the page with the answer.</p>
+      </div>
+    </article>
     <!-- </div>
     <div class="col-md-4">
       <div class="content-section">
